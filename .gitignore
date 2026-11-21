@@ -1,3 +1,27 @@
+# IDEs and editor settings
+.idea/
+*.iml
+.vscode/
+.fleet/
 .settings/
-bin/
 .classpath
+.project
+nbproject/private/
+nbbuild/
+.nb-gradle/
+*.sublime-workspace
+*.swp
+*.swo
+
+# Build output
+target/
+build/
+out/
+bin/
+dist/
+*.class
+
+# Operating system files
+.DS_Store
+Thumbs.db
+desktop.ini
