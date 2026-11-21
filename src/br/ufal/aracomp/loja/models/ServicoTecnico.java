@@ -1,5 +1,7 @@
 package br.ufal.aracomp.loja.models;
 
+import br.ufal.aracomp.loja.exception.*;
+
 public class ServicoTecnico implements Precificavel {
 	private String id;
 	private String nome;
@@ -8,7 +10,15 @@ public class ServicoTecnico implements Precificavel {
 	private double tempoHoraServico;
 	private String dataRealizacao; // mudar futuramente o tipo desse atributo kkk, fiquei com dúvida de como importa o tipo dele
 	
-	public ServicoTecnico(String id, String nome, double precoHora, double tempoHoraServico, String dataRealizacao) {
+	public ServicoTecnico(String id, String nome, double precoHora, double tempoHoraServico, String dataRealizacao)
+			throws DadoEntradaException {
+		if (precoHora < 0) {
+			throw new DadoEntradaException("O preço não pode ser negativo.");
+		}
+		if (tempoHoraServico < 0) {
+			throw new DadoEntradaException("O tempo não pode ser negativo.");
+		}
+
 		this.id = id;
 		this.nome = nome;
 		this.precoHora = precoHora;
@@ -21,6 +31,10 @@ public class ServicoTecnico implements Precificavel {
 		double total = this.precoHora * this.tempoHoraServico;
 		
 		return total;
+	}
+
+	public String getId() {
+		return this.id;
 	}
 	
 	public String getNome() {
