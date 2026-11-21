@@ -1,0 +1,23 @@
+package br.ufal.aracomp.loja.models;
+
+public class PessoaJuridica extends Cliente {
+	private String cnpj;
+	
+	public PessoaJuridica(String id, String nome, String email, String endereco, String cnpj) {
+		super(id, nome, email, endereco);
+		this.cnpj = cnpj;
+	}
+	
+	@Override
+	public String getDocumentacao() {
+		return String.format("Nome: %s \nCNPJ: %s", this.getNome(), this.cnpj);
+	}
+	
+	@Override
+	// polimorfimos de sobrecrita salva aq pq eu sobrescrevo para aparecer no views o cpf ou cnpj, 
+	// identificando se é pessoa física ou jurídica
+	public String toString() {
+		return String.format("%s | %s | %s | CNPJ: %s | %s", this.getId(), this.getNome(), this.getEmail(), this.cnpj, this.isAtivo());
+	}
+
+}
