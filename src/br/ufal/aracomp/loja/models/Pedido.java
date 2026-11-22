@@ -25,6 +25,10 @@ public class Pedido {
 	public void adicionarItem(ItemPedido novo_itempedido) {
 		this.itens.add(novo_itempedido);
 	}
+
+	public void removerItem(ItemPedido item) {
+		this.itens.remove(item);
+	}
 	
 	public List<ItemPedido> listarItens() {
 		return this.itens;
@@ -33,6 +37,11 @@ public class Pedido {
 	public void finalizarPedido() {
 		this.status = StatusPedido.FINALIZADO;
 		this.dataFinalizacao = LocalDate.now().toString(); // eu tava pensando em passar a data também via parâmetros, não sei, validar com os guys
+	}
+
+	public void cancelarPedido() {
+		this.status = StatusPedido.CANCELADO;
+		this.dataFinalizacao = LocalDate.now().toString();
 	}
 	
 	public double getValorBruto() { // valor bruto é o valor sem desconto
@@ -51,9 +60,16 @@ public class Pedido {
 		return this.status;
 	}
 
+	public Cliente getCliente() {
+		return this.cliente;
+	}
+
 	public String toString() {
 		return String.format("%s | %s | %s | %s | R$ %s", this.id, this.cliente.getNome() ,this.status, this.dataCriacao, this.getValorBruto());
 	}
-	
+
+	public String getIdPedido(){
+		return this.id;
+	}
 	
 }

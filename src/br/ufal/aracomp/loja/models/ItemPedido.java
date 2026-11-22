@@ -21,4 +21,16 @@ public class ItemPedido {
 	public int getQuantidade() { // precisei do encapulusamento desse atributo para poder usar nos descontos
 		return this.quantidade;
 	}
+
+	public Precificavel getItem() {
+		return this.item;
+	}
+
+	public void adicionarQuantidade(int quantidade) {
+		this.quantidade += quantidade;
+	}
+
+	public void removerQuantidade(int quantidade) {
+		this.quantidade -= quantidade;
+	}
 }
