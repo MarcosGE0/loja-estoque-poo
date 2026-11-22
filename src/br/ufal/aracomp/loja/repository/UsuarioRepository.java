@@ -18,7 +18,7 @@ public class UsuarioRepository {
 	}
 	
 	public void removerUsuario(String id) {
-		//
+		// implementar remoção do usuário 
 	}
 }
 
