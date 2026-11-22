@@ -30,13 +30,13 @@ public class UsuarioService {
 		this.usuariorepository.adicionarUsuario(novo_usuario); // se passar por todas as regras
 	}
 	
-	public Usuario buscarPorId(String id_buscado) throws RegistroNaoEncontradoException {
+	public Usuario buscarPorId(String id_usuario_buscado) throws RegistroNaoEncontradoException {
 		for (Usuario usuario_cadastrado: usuariorepository.listarUsuarios()) { // percorrer toda a lista de usuários cadastrados
-			if(usuario_cadastrado.getId().equals(id_buscado)) {
+			if(usuario_cadastrado.getId().equals(id_usuario_buscado)) {
 				return usuario_cadastrado;
 			}
 		}
-		throw new RegistroNaoEncontradoException("Usuário com ID: " + id_buscado + " não está cadastrado.");
+		throw new RegistroNaoEncontradoException("Usuário com ID: " + id_usuario_buscado + " não está cadastrado.");
 		// tem que jgoar a exceção pq esse metodo tem que retornar o tipo Usuário
 	}
 	

@@ -2,6 +2,7 @@ package br.ufal.aracomp.loja.service;
 import br.ufal.aracomp.loja.repository.*;
 import br.ufal.aracomp.loja.models.*;
 import br.ufal.aracomp.loja.exception.*;
+import java.util.*;
 
 public class ProdutoService {
 	private ProdutoRepository produtoRepository;
@@ -32,4 +33,52 @@ public class ProdutoService {
 		this.produtoRepository.adicionarProduto(novo_produto);
 	}
 	
+	public Produto buscarPorId(String id_produto_buscado) throws RegistroNaoEncontradoException {
+		
+		for(Produto produto_cadastrado: produtoRepository.listarProdutos()) {
+			if(produto_cadastrado.getId().equals(id_produto_buscado)) {
+				return produto_cadastrado;
+			}
+		}
+		
+		throw new RegistroNaoEncontradoException("Produto com ID: " + id_produto_buscado + " não está cadastrado.");
+		
+	}
+	
+	public List<Produto> listarProdutos() {
+		// poderiamos pensar em insewrir uma exceção para ver a quantidade de itens cadastrados, se não tiver nenhum, ele retorna um exception
+		return produtoRepository.listarProdutos();
+	}
+	
+	
+	public void desativarProduto(String id_produto_desativar) throws RegistroNaoEncontradoException, ProdutoIndisponivelException {
+		// primeiro buscar na base de dados
+		// dps verificar o status
+		// se o status tiver ativado, desativa
+		
+		Produto produto = buscarPorId(id_produto_desativar);
+		
+		if(produto.isDisponivel()) {
+			produto.desativar(); // mesmo se tiver em estoque, não permitir vender
+		}
+		
+		else {
+			throw new ProdutoIndisponivelException("O produto ID: " + id_produto_desativar + " já está desativado!");
+		}
+		
+	}
+	
+	public void removerProduto(String id_produto_remover) {
+		produtoRepository.removerProduto(id_produto_remover); // atenção aqui, tem que ver depois se é necessário inserir exception para validar antes se existe
+	}
+	
+	
+	public void adicionarEstoque(String id_produto, int qtd) throws RegistroNaoEncontradoException, DadoEntradaException {
+		if(qtd <= 0) {
+			throw new DadoEntradaException("Valor de estoque inválido!");
+		}
+		
+		Produto produto = buscarPorId(id_produto);
+		produto.adicionarEstoque(qtd);
+	}
 }

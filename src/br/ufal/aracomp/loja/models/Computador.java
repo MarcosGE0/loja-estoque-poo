@@ -18,6 +18,6 @@ public class Computador extends Produto {
 	
 	@Override
 	public String toString() {
-		return String.format("%s | %s | R$ %s | Qtd: %s | %s | %s | %s", this.getId(), this.getNome(), this.getPreco(), this.getQtdEstoque(), this.isDisponivel(), this.getProcessador(), this.memoriaRam);
+		return String.format("%s | %s | R$ %s | Qtd: %s | %s | %s | %s GB", this.getId(), this.getNome(), this.getPreco(), this.getQtdEstoque(), this.isDisponivel(), this.getProcessador(), this.memoriaRam);
 	}
 }

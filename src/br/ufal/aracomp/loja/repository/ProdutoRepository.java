@@ -33,6 +33,7 @@ public class ProdutoRepository {
 		if(posicao_produto != -1) {
 			this.produtos.remove(posicao_produto);
 		}
+		// na construção do service acho que tem que inserir uma excessão aqui, pq se ele naõ encontrar o produto é complicado
 		
 	}
 }

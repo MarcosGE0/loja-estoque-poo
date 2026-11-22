@@ -11,17 +11,27 @@ public class Main {
 		Scanner scanner = new Scanner(System.in);
 		
 		UsuarioRepository usuarioRepository = new UsuarioRepository();
+		ProdutoRepository produtoRepository = new ProdutoRepository();
+		ServicoTecnicoRepository servicoTecnicoRepository = new ServicoTecnicoRepository();
 		
 		UsuarioService usuarioService = new UsuarioService(usuarioRepository);
+		ProdutoService produtoService = new ProdutoService(produtoRepository);
+		ServicoTecnicoService servicoTecnicoService = new ServicoTecnicoService(servicoTecnicoRepository);
 		
 		UsuarioController usuarioController = new UsuarioController(usuarioService);
+		ProdutoController produtoController = new ProdutoController(produtoService);
+		ServicoTecnicoController servicoTecnicoController = new ServicoTecnicoController(servicoTecnicoService);
 		
 		UsuarioView usuarioView = new UsuarioView(usuarioController, scanner);
+		ProdutoView produtoView = new ProdutoView(produtoController, scanner);
+		ServicoTecnicoView servicoTecnicoView = new ServicoTecnicoView( servicoTecnicoController, scanner);
 		
 		int opcao = -1;
 		while(opcao != 0) {
 			System.out.println("\n=== LOJA DE INFORMÁTICA ===");
             System.out.println("1 - Gerenciar Usuários");
+            System.out.println("2 - Gerenciar Produtos");
+            System.out.println("3 - Gerenciar Serviços Técnicos");
             System.out.println("0 - Sair");
             System.out.print("Opção: ");
             
@@ -32,13 +42,24 @@ public class Main {
                 continue;
             }
             
-    		if(opcao == 1) {
-    			usuarioView.exibirMenu();
-    		}
-    		else if (opcao == 0) {
-    			System.out.println("Encerrando sistema...");
-    		}
-    		
+            switch(opcao) {
+            
+	            case 0:
+	            	System.out.println("Encerrando sistema...");
+	            	break;
+	            	
+	            case 1:
+	            	usuarioView.exibirMenu();
+	            	break;
+	            
+	            case 2:
+	            	produtoView.exibirMenu();
+	            	break;
+	            	
+	            case 3:
+	            	servicoTecnicoView.exibirMenu();
+	            	break;
+            }
 		}
 		
 
@@ -46,5 +67,3 @@ public class Main {
 		
 	}
 }
-
-// PAREI AQUI POIS ESTOU VENDO A UTILIDADE DO SERVICE ANTES DE CONTINUAR....
