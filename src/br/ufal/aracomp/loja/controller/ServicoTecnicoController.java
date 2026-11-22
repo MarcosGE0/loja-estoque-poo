@@ -13,7 +13,7 @@ public class ServicoTecnicoController {
         this.servicoTecnicoService = servicoTecnicoService;
     }
 
-    public void cadastrarServicoTecnico(ServicoTecnico servico) throws RegistroCadastradoException {
+    public void cadastrarServicoTecnico (ServicoTecnico servico) throws RegistroCadastradoException {
         servicoTecnicoService.cadastrarServicoTecnico(servico);
     }
 
@@ -25,7 +25,7 @@ public class ServicoTecnicoController {
         return servicoTecnicoService.buscarPorIdServicoTecnico(idServicoTecnico);
     }
 
-    public List<ServicoTecnico> listarServicosTecnico() {
+    public List<ServicoTecnico> listarServicoTecnico() {
         return servicoTecnicoService.listarServicoTecnico();
     }
 }
