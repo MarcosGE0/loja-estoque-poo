@@ -87,7 +87,7 @@ public class ServicoTecnicoView {
 
     private void telaListarServicosTecnicos() {
         System.out.println("\n--- Serviços Técnicos Cadastrados ---");
-        List<ServicoTecnico> servicos = servicoTecnicoController.listarServicosTecnico();
+        List<ServicoTecnico> servicos = servicoTecnicoController.listarServicoTecnico();
         if (servicos.isEmpty()) {
             System.out.println("Nenhum serviço técnico cadastrado.");
             return;
