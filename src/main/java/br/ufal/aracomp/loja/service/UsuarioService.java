@@ -21,11 +21,11 @@ public class UsuarioService {
 		for(Usuario usuario_cadastrado: usuariorepository.listarUsuarios()) { // percorrer todos os registros de usuários cadastrados 
 			if(usuario_cadastrado.getEmail().equals(novo_usuario.getEmail())) { // e ver se tem algum email cadastrado
 				// se for verdadeiro, lançar a desgraça da exceção kk
-				throw new RegistroCadastradoException("E-mail já utilizado!"); // id poderá ser 
+				throw new RegistroCadastradoException("E-mail já utilizado: " + novo_usuario.getEmail() + ".");
 			}
 			
 			if(usuario_cadastrado.getId().equals(novo_usuario.getId())) {
-				throw new RegistroCadastradoException("ID já utilizado!"); 
+				throw new RegistroCadastradoException("ID já utilizado: " + novo_usuario.getId() + ".");
 			}
 			
 			// ainda falta inserir duas condições para validar se existe CPF ou CNJP`já cadastrados kk

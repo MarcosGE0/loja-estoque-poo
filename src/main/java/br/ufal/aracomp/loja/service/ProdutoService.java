@@ -26,11 +26,11 @@ public class ProdutoService {
 		}
 		
 		if (novoProduto.getPreco() <= 0) {
-			throw new DadoEntradaException("Valor inválido!"); // validar se o valor do produto é negativo
+			throw new DadoEntradaException("Preço deve ser maior que zero (recebido: " + novoProduto.getPreco() + ").");
 		}
 		
-		if (novoProduto.getQtdEstoque() <= 0) { // regra de negócio
-			throw new DadoEntradaException("Valor inválido!"); // validar se o estoque é negativo
+		if (novoProduto.getQtdEstoque() <= 0) {
+			throw new DadoEntradaException("Quantidade em estoque deve ser maior que zero (recebida: " + novoProduto.getQtdEstoque() + ").");
 		}
 		
 		// validar preenchimento dos demais atributos herdeiros de Produto para que não sejam cadastrados nulos, exemplo: cadastrar
@@ -82,7 +82,7 @@ public class ProdutoService {
 	
 	public void adicionarEstoque(String id_produto, int qtd) throws RegistroNaoEncontradoException, DadoEntradaException {
 		if(qtd <= 0) {
-			throw new DadoEntradaException("Valor de estoque inválido!");
+			throw new DadoEntradaException("Quantidade de estoque a adicionar deve ser maior que zero (recebida: " + qtd + ").");
 		}
 		
 		Produto produto = buscarPorId(id_produto);

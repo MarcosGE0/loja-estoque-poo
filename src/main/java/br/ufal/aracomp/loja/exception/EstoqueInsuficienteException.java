@@ -1,8 +1,7 @@
 package br.ufal.aracomp.loja.exception;
 
-public class EstoqueInsuficienteException extends Exception {
-	private String mensagem;
-	
+public class EstoqueInsuficienteException extends DominioException {
+
 	public EstoqueInsuficienteException(String mensagem) {
 		super(mensagem);
 	}

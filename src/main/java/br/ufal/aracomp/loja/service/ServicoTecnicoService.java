@@ -23,7 +23,7 @@ public class ServicoTecnicoService {
     public void cadastrarServicoTecnico(ServicoTecnico novo_servico) throws RegistroCadastradoException {
         for (ServicoTecnico servico : servicoTecnicoRepository.listarServicoTecnico()) {
             if (servico.getId().equals(novo_servico.getId())) {
-                throw new RegistroCadastradoException("ID já utilizado!");
+                throw new RegistroCadastradoException("ID de serviço técnico já utilizado: " + novo_servico.getId() + ".");
             }
         }
 

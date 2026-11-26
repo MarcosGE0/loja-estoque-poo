@@ -1,11 +1,7 @@
 package br.ufal.aracomp.loja.views;
 import br.ufal.aracomp.loja.controller.ProdutoController;
-import br.ufal.aracomp.loja.exception.ProdutoIndisponivelException;
-import br.ufal.aracomp.loja.exception.RegistroCadastradoException;
-import br.ufal.aracomp.loja.exception.RegistroNaoEncontradoException;
 import br.ufal.aracomp.loja.controller.*;
-import br.ufal.aracomp.loja.exception.DadoEntradaException;
-import br.ufal.aracomp.loja.exception.*;
+import br.ufal.aracomp.loja.exception.DominioException;
 import br.ufal.aracomp.loja.models.Produto;
 
 import java.util.Scanner;
@@ -109,11 +105,8 @@ public class ProdutoView {
 			produtoController.cadastrarPeriferico(id, nome, preco, qtd_estoque, conexao);
 			System.out.println("Periférico Cadastrado com Sucesso!");
 		}
-		catch (DadoEntradaException e) {
-			System.out.println("Não foi possível cadastrar: " + e.getMessage());
-		}
-		catch (RegistroCadastradoException e) {
-			System.out.println("Não foi possível cadastrar: " + e.getMessage());
+		catch (DominioException e) {
+			System.out.println("Erro: " + e.getMessage());
 		}
 	}
 	
@@ -139,11 +132,8 @@ public class ProdutoView {
 			produtoController.cadastrarPecaHardware(id, nome, preco, qtd_estoque, compatibilidade);
 			System.out.println("Peça de Hardware Cadastrado com Sucesso!");
 		}
-		catch (DadoEntradaException e) {
-			System.out.println("Não foi possível cadastrar: " + e.getMessage());
-		}
-		catch (RegistroCadastradoException e) {
-			System.out.println("Não foi possível cadastrar: " + e.getMessage());
+		catch (DominioException e) {
+			System.out.println("Erro: " + e.getMessage());
 		}
 	}
 	
@@ -176,11 +166,8 @@ public class ProdutoView {
 			produtoController.cadastrarComputador(id, nome, preco, qtd_estoque, processador, memoriaRam, sistemaOperacional);
 			System.out.println("Computador Cadastrado com Sucesso!");
 		}
-		catch (DadoEntradaException e) {
-			System.out.println("Não foi possível cadastrar: " + e.getMessage());
-		}
-		catch (RegistroCadastradoException e) {
-			System.out.println("Não foi possível cadastrar: " + e.getMessage());
+		catch (DominioException e) {
+			System.out.println("Erro: " + e.getMessage());
 		}
 	}
 	
@@ -209,11 +196,8 @@ public class ProdutoView {
 			produtoController.cadastrarSoftware(id, nome, preco, qtd_estoque, chave, plataforma);
 			System.out.println("Software Cadastrado com Sucesso!");
 		}
-		catch (DadoEntradaException e) {
-			System.out.println("Não foi possível cadastrar: " + e.getMessage());
-		}
-		catch (RegistroCadastradoException e) {
-			System.out.println("Não foi possível cadastrar: " + e.getMessage());
+		catch (DominioException e) {
+			System.out.println("Erro: " + e.getMessage());
 		}
 	}
 	
@@ -239,8 +223,8 @@ public class ProdutoView {
 			
 		}
 	
-		catch (RegistroNaoEncontradoException e) {
-			System.out.println("Não foi possível consultar: " + e.getMessage());
+		catch (DominioException e) {
+			System.out.println("Erro: " + e.getMessage());
 		}
 	}
 	
@@ -256,12 +240,8 @@ public class ProdutoView {
 			produtoController.desativarProduto(id);
 		}
 	
-		catch (RegistroNaoEncontradoException e) {
-			System.out.println("Não foi possível consultar: " + e.getMessage());
-		}
-		
-		catch (ProdutoIndisponivelException e) {
-			System.out.println("Não foi possível atualizar: " + e.getMessage());
+		catch (DominioException e) {
+			System.out.println("Erro: " + e.getMessage());
 		}
 	}
 	
@@ -296,12 +276,8 @@ public class ProdutoView {
 			System.out.println("Estoque do produto " + produto.getNome() + " atualizado com sucesso! (uni): " + produto.getQtdEstoque());
 			
 		}
-		catch (RegistroNaoEncontradoException e) {
-			System.out.println("Não foi possível consultar: " + e.getMessage());
-		}
-		
-		catch (DadoEntradaException e) {
-			System.out.println("Não foi possível: " + e.getMessage());
+		catch (DominioException e) {
+			System.out.println("Erro: " + e.getMessage());
 		}
 		
 	}

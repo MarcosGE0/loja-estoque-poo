@@ -2,8 +2,7 @@ package br.ufal.aracomp.loja.views;
 
 import br.ufal.aracomp.loja.controller.PedidoController;
 import br.ufal.aracomp.loja.controller.UsuarioController;
-import br.ufal.aracomp.loja.exception.*;
-import br.ufal.aracomp.loja.exception.*;
+import br.ufal.aracomp.loja.exception.DominioException;
 import br.ufal.aracomp.loja.models.Cliente;
 import br.ufal.aracomp.loja.models.Pedido;
 import br.ufal.aracomp.loja.models.Usuario;
@@ -89,14 +88,8 @@ public class PedidoView {
 			Pedido pedido = new Pedido(idPedido, (Cliente) usuario, dataCriacao);
 			pedidoController.cadastrarPedido(pedido);
 			System.out.println("Pedido cadastrado com sucesso!");
-		} catch (RegistroNaoEncontradoException e) {
-			System.out.println("Não foi possível cadastrar: " + e.getMessage());
-		} catch (DadoEntradaException e) {
-			System.out.println("Não foi possível cadastrar: " + e.getMessage());
-		} catch (RegistroCadastradoException e) {
-			System.out.println("Não foi possível cadastrar: " + e.getMessage());
-		} catch (UsuarioInativoException e) {
-			System.out.println("Não foi possível cadastrar: " + e.getMessage());
+		} catch (DominioException e) {
+			System.out.println("Erro: " + e.getMessage());
 		}
 	}
 
@@ -120,10 +113,8 @@ public class PedidoView {
 
 		try {
 			System.out.println(pedidoController.buscarPorId(idPedido));
-		} catch (DadoEntradaException e) {
-			System.out.println(e.getMessage());
-		} catch (RegistroNaoEncontradoException e) {
-			System.out.println(e.getMessage());
+		} catch (DominioException e) {
+			System.out.println("Erro: " + e.getMessage());
 		}
 	}
 
@@ -141,14 +132,8 @@ public class PedidoView {
 			System.out.println("Produto adicionado ao pedido!");
 		} catch (NumberFormatException e) {
 			System.out.println("Quantidade inválida!");
-		} catch (DadoEntradaException e) {
-			System.out.println(e.getMessage());
-		} catch (RegistroNaoEncontradoException e) {
-			System.out.println(e.getMessage());
-		} catch (ProdutoIndisponivelException e) {
-			System.out.println(e.getMessage());
-		} catch (EstoqueInsuficienteException e) {
-			System.out.println(e.getMessage());
+		} catch (DominioException e) {
+			System.out.println("Erro: " + e.getMessage());
 		}
 	}
 
@@ -166,12 +151,8 @@ public class PedidoView {
 			System.out.println("Serviço técnico adicionado ao pedido!");
 		} catch (NumberFormatException e) {
 			System.out.println("Quantidade inválida!");
-		} catch (DadoEntradaException e) {
-			System.out.println(e.getMessage());
-		} catch (RegistroNaoEncontradoException e) {
-			System.out.println(e.getMessage());
-		} catch (ServicoIndisponivelException e) {
-			System.out.println(e.getMessage());
+		} catch (DominioException e) {
+			System.out.println("Erro: " + e.getMessage());
 		}
 	}
 
@@ -189,10 +170,8 @@ public class PedidoView {
 			System.out.println("Item removido do pedido!");
 		} catch (NumberFormatException e) {
 			System.out.println("Quantidade inválida!");
-		} catch (DadoEntradaException e) {
-			System.out.println(e.getMessage());
-		} catch (RegistroNaoEncontradoException e) {
-			System.out.println(e.getMessage());
+		} catch (DominioException e) {
+			System.out.println("Erro: " + e.getMessage());
 		}
 	}
 
@@ -204,14 +183,8 @@ public class PedidoView {
 		try {
 			pedidoController.finalizarPedido(idPedido);
 			System.out.println("Pedido finalizado com sucesso!");
-		} catch (DadoEntradaException e) {
-			System.out.println(e.getMessage());
-		} catch (RegistroNaoEncontradoException e) {
-			System.out.println(e.getMessage());
-		} catch (ProdutoIndisponivelException e) {
-			System.out.println(e.getMessage());
-		} catch (EstoqueInsuficienteException e) {
-			System.out.println(e.getMessage());
+		} catch (DominioException e) {
+			System.out.println("Erro: " + e.getMessage());
 		}
 	}
 
@@ -223,10 +196,8 @@ public class PedidoView {
 		try {
 			pedidoController.cancelarPedido(idPedido);
 			System.out.println("Pedido cancelado com sucesso!");
-		} catch (DadoEntradaException e) {
-			System.out.println(e.getMessage());
-		} catch (RegistroNaoEncontradoException e) {
-			System.out.println(e.getMessage());
+		} catch (DominioException e) {
+			System.out.println("Erro: " + e.getMessage());
 		}
 	}
 
@@ -238,10 +209,8 @@ public class PedidoView {
 		try {
 			pedidoController.removerPedido(idPedido);
 			System.out.println("Pedido removido com sucesso!");
-		} catch (DadoEntradaException e) {
-			System.out.println(e.getMessage());
-		} catch (RegistroNaoEncontradoException e) {
-			System.out.println(e.getMessage());
+		} catch (DominioException e) {
+			System.out.println("Erro: " + e.getMessage());
 		}
 	}
 }

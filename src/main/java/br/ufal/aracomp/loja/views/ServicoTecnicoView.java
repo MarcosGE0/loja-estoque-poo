@@ -1,9 +1,7 @@
 package br.ufal.aracomp.loja.views;
 
 import br.ufal.aracomp.loja.controller.ServicoTecnicoController;
-import br.ufal.aracomp.loja.exception.DadoEntradaException;
-import br.ufal.aracomp.loja.exception.RegistroCadastradoException;
-import br.ufal.aracomp.loja.exception.RegistroNaoEncontradoException;
+import br.ufal.aracomp.loja.exception.DominioException;
 import br.ufal.aracomp.loja.models.ServicoTecnico;
 import br.ufal.aracomp.loja.controller.*;
 import br.ufal.aracomp.loja.exception.*;
@@ -83,10 +81,8 @@ public class ServicoTecnicoView {
             ServicoTecnico servico = new ServicoTecnico(id, nome, precoHora, tempoHoras, dataRealizacao);
             servicoTecnicoController.cadastrarServicoTecnico(servico);
             System.out.println("Serviço técnico cadastrado com sucesso!");
-        } catch (RegistroCadastradoException e) {
-            System.out.println("Erro no cadastro: " + e.getMessage());
-        } catch (DadoEntradaException e) {
-            System.out.println("Erro nos dados do serviço: " + e.getMessage());
+        } catch (DominioException e) {
+            System.out.println("Erro: " + e.getMessage());
         }
     }
 
@@ -110,8 +106,8 @@ public class ServicoTecnicoView {
 
         try {
             exibirServico(servicoTecnicoController.buscarPorId(id));
-        } catch (RegistroNaoEncontradoException e) {
-            System.out.println(e.getMessage());
+        } catch (DominioException e) {
+            System.out.println("Erro: " + e.getMessage());
         }
     }
 
@@ -123,8 +119,8 @@ public class ServicoTecnicoView {
         try {
             servicoTecnicoController.removerServicoTecnico(id);
             System.out.println("Serviço técnico removido com sucesso!");
-        } catch (RegistroNaoEncontradoException e) {
-            System.out.println(e.getMessage());
+        } catch (DominioException e) {
+            System.out.println("Erro: " + e.getMessage());
         }
     }
 

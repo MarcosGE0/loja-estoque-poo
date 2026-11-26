@@ -16,10 +16,10 @@ public class ServicoTecnico implements Precificavel, Serializable {
 	public ServicoTecnico(String id, String nome, double precoHora, double tempoHoraServico, String dataRealizacao)
 			throws DadoEntradaException {
 		if (precoHora < 0) {
-			throw new DadoEntradaException("O preço não pode ser negativo.");
+			throw new DadoEntradaException("O preço por hora não pode ser negativo (recebido: " + precoHora + ").");
 		}
 		if (tempoHoraServico < 0) {
-			throw new DadoEntradaException("O tempo não pode ser negativo.");
+			throw new DadoEntradaException("O tempo do serviço não pode ser negativo (recebido: " + tempoHoraServico + ").");
 		}
 
 		this.id = id;

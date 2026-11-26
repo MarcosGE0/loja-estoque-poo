@@ -50,7 +50,7 @@ public class Produto implements Precificavel, Serializable {
 	
 	public void adicionarEstoque(int qtd) throws DadoEntradaException {
 		if (qtd <= 0) {
-			throw new DadoEntradaException("A quantidade a adicionar deve ser maior que zero.");
+			throw new DadoEntradaException("A quantidade a adicionar deve ser maior que zero (recebida: " + qtd + ").");
 		}
 
 		this.qtdEstoque += qtd;
@@ -58,10 +58,10 @@ public class Produto implements Precificavel, Serializable {
 	
 	public void removerEstoque(int qtd) throws DadoEntradaException, EstoqueInsuficienteException {
 		if (qtd <= 0) {
-			throw new DadoEntradaException("A quantidade a remover deve ser maior que zero.");
+			throw new DadoEntradaException("A quantidade a remover deve ser maior que zero (recebida: " + qtd + ").");
 		}
 		if (qtd > this.qtdEstoque) {
-			throw new EstoqueInsuficienteException("Não há estoque suficiente para remover essa quantidade.");
+			throw new EstoqueInsuficienteException("Estoque insuficiente para remover " + qtd + " unidade(s); disponível: " + this.qtdEstoque + ".");
 		}
 
 		this.qtdEstoque -= qtd;

@@ -38,7 +38,7 @@ public class PedidoService {
 
         // Impede pedidos com IDs já cadastrados.
         if (pedidos.buscarPedido(novoPedido.getIdPedido()) != null) {
-            throw new RegistroCadastradoException("Já existe um pedido com esse ID.");
+            throw new RegistroCadastradoException("Já existe um pedido com o ID " + novoPedido.getIdPedido() + ".");
         }
 
         // Exige que o pedido possua um cliente, não pode ser nulo.
@@ -58,12 +58,12 @@ public class PedidoService {
 
         // Confirma que o usuário encontrado é um cliente cadastrado.
         if (!(clienteCadastrado instanceof Cliente)) {
-            throw new RegistroNaoEncontradoException("Cliente não cadastrado.");
+            throw new RegistroNaoEncontradoException("Cliente com ID " + cliente.getId() + " não cadastrado.");
         }
 
         // Impede pedidos feitos por clientes inativos.
         if (!clienteCadastrado.isAtivo()) {
-            throw new UsuarioInativoException("Cliente está inativo.");
+            throw new UsuarioInativoException("Cliente com ID " + cliente.getId() + " está inativo.");
         }
 
         // Garante que pedidos novos comecem em aberto.
@@ -83,7 +83,7 @@ public class PedidoService {
 
         // Impede remoção de pedido que não está cadastrado.
         if (pedidos.buscarPedido(idPedido) == null) {
-            throw new RegistroNaoEncontradoException("Pedido não encontrado.");
+            throw new RegistroNaoEncontradoException("Pedido com ID " + idPedido + " não encontrado.");
         }
 
         // Remove o pedido encontrado pelo repositório.
@@ -97,7 +97,7 @@ public class PedidoService {
         Pedido pedido = buscarPedidoAberto(idPedido);
 
         if (quantidade <= 0) {
-            throw new DadoEntradaException("Quantidade deve ser maior que zero.");
+            throw new DadoEntradaException("Quantidade deve ser maior que zero (recebida: " + quantidade + ").");
         }
 
         Produto produto = null;
@@ -109,11 +109,11 @@ public class PedidoService {
         }
 
         if (produto == null) {
-            throw new RegistroNaoEncontradoException("Produto não encontrado.");
+            throw new RegistroNaoEncontradoException("Produto com ID " + idProduto + " não encontrado.");
         }
 
         if (!produto.isDisponivel()) {
-            throw new ProdutoIndisponivelException("Produto indisponível.");
+            throw new ProdutoIndisponivelException("Produto com ID " + idProduto + " está indisponível.");
         }
 
         int quantidadeNoPedido = 0;
@@ -125,7 +125,7 @@ public class PedidoService {
         }
 
         if (produto.getQtdEstoque() < quantidadeNoPedido + quantidade) {
-            throw new EstoqueInsuficienteException("Estoque insuficiente.");
+            throw new EstoqueInsuficienteException("Estoque insuficiente para adicionar " + quantidade + " unidade(s) do produto " + idProduto + "; disponível: " + (produto.getQtdEstoque() - quantidadeNoPedido) + ".");
         }
 
         for (ItemPedido item : pedido.listarItens()) {
@@ -148,7 +148,7 @@ public class PedidoService {
         Pedido pedido = buscarPedidoAberto(idPedido);
 
         if (quantidade <= 0) {
-            throw new DadoEntradaException("Quantidade deve ser maior que zero.");
+            throw new DadoEntradaException("Quantidade deve ser maior que zero (recebida: " + quantidade + ").");
         }
 
         ServicoTecnico servico = null;
@@ -160,11 +160,11 @@ public class PedidoService {
         }
 
         if (servico == null) {
-            throw new RegistroNaoEncontradoException("Serviço técnico não encontrado.");
+            throw new RegistroNaoEncontradoException("Serviço técnico com ID " + idServico + " não encontrado.");
         }
 
         if (!servico.isDisponivel()) {
-            throw new ServicoIndisponivelException("Serviço técnico indisponível.");
+            throw new ServicoIndisponivelException("Serviço técnico com ID " + idServico + " está indisponível.");
         }
 
         for (ItemPedido item : pedido.listarItens()) {
@@ -190,7 +190,7 @@ public class PedidoService {
         }
 
         if (quantidade <= 0) {
-            throw new DadoEntradaException("Quantidade deve ser maior que zero.");
+            throw new DadoEntradaException("Quantidade deve ser maior que zero (recebida: " + quantidade + ").");
         }
 
         for (int i = 0; i < pedido.listarItens().size(); i++) {
@@ -210,14 +210,14 @@ public class PedidoService {
             }
         }
 
-        throw new RegistroNaoEncontradoException("Item não encontrado no pedido.");
+        throw new RegistroNaoEncontradoException("Item com ID " + idItem + " não encontrado no pedido " + idPedido + ".");
     }
 
     // Atualiza ou remove o item conforme a quantidade informada.
     private void removerQuantidadeItem(Pedido pedido, ItemPedido item, int quantidade)
             throws DadoEntradaException {
         if (quantidade > item.getQuantidade()) {
-            throw new DadoEntradaException("Quantidade maior que a quantidade no pedido.");
+            throw new DadoEntradaException("Quantidade solicitada (" + quantidade + ") é maior que a quantidade no pedido (" + item.getQuantidade() + ").");
         }
 
         if (quantidade == item.getQuantidade()) {
@@ -232,7 +232,7 @@ public class PedidoService {
         Pedido pedido = buscarPorId(idPedido);
 
         if (pedido.getStatus() != StatusPedido.ABERTO) {
-            throw new DadoEntradaException("O pedido não está aberto.");
+            throw new DadoEntradaException("Pedido com ID " + idPedido + " não está aberto.");
         }
 
         return pedido;
@@ -246,7 +246,7 @@ public class PedidoService {
 
         Pedido pedido = pedidos.buscarPedido(idPedido);
         if (pedido == null) {
-            throw new RegistroNaoEncontradoException("Pedido não encontrado.");
+            throw new RegistroNaoEncontradoException("Pedido com ID " + idPedido + " não encontrado.");
         }
 
         return pedido;
@@ -273,11 +273,11 @@ public class PedidoService {
                 Produto produto = buscarProdutoCadastrado(((Produto) item.getItem()).getId());
 
                 if (!produto.isDisponivel()) {
-                    throw new ProdutoIndisponivelException("Produto indisponível.");
+                    throw new ProdutoIndisponivelException("Produto com ID " + produto.getId() + " está indisponível.");
                 }
 
                 if (produto.getQtdEstoque() < item.getQuantidade()) {
-                    throw new EstoqueInsuficienteException("Estoque insuficiente.");
+                    throw new EstoqueInsuficienteException("Estoque insuficiente para o produto " + produto.getId() + ": solicitado " + item.getQuantidade() + ", disponível " + produto.getQtdEstoque() + ".");
                 }
             }
         }
@@ -302,7 +302,7 @@ public class PedidoService {
             }
         }
 
-        throw new RegistroNaoEncontradoException("Produto não cadastrado.");
+        throw new RegistroNaoEncontradoException("Produto com ID " + idProduto + " não cadastrado.");
     }
 
     // Cancela um pedido aberto.

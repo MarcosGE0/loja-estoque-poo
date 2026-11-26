@@ -1,7 +1,6 @@
 package br.ufal.aracomp.loja.views;
 import br.ufal.aracomp.loja.controller.UsuarioController;
-import br.ufal.aracomp.loja.exception.RegistroCadastradoException;
-import br.ufal.aracomp.loja.exception.RegistroNaoEncontradoException;
+import br.ufal.aracomp.loja.exception.DominioException;
 import br.ufal.aracomp.loja.models.Usuario;
 import br.ufal.aracomp.loja.controller.*;
 import br.ufal.aracomp.loja.exception.*;
@@ -84,9 +83,8 @@ public class UsuarioView {
 		try {
 			usuarioController.cadastrarPessoaFisica(id, nome, email, endereco, cpf);
 			System.out.println("Pessoa Física cadastrada com sucesso!");
-		} catch (RegistroCadastradoException e) {
-            // Captura DadoEntradaException (e-mail/ID duplicado, etc.) sem derrubar o menu
-            System.out.println("Erro no cadastro: " + e.getMessage());
+		} catch (DominioException e) {
+            System.out.println("Erro: " + e.getMessage());
         }
 	}
 	
@@ -112,8 +110,8 @@ public class UsuarioView {
 			usuarioController.cadastrarPessoaJuridica(id, nome, email, endereco, cnpj);
 			System.out.println("Pessoa Jurídica cadastrada com sucesso!");
 		}
-		catch (RegistroCadastradoException e) {
-			System.out.println("Erro no cadastro: " + e.getMessage());
+		catch (DominioException e) {
+			System.out.println("Erro: " + e.getMessage());
 		}
 	}
 	
@@ -140,8 +138,8 @@ public class UsuarioView {
 			usuarioController.cadastrarAdministrador(id, nome, email, endereco, senha);
 			System.out.println("Administrador cadastrado com sucesso!");
 		}
-		catch (RegistroCadastradoException e) {
-			System.out.println("Erro no cadastro: " + e.getMessage());
+		catch (DominioException e) {
+			System.out.println("Erro: " + e.getMessage());
 		}
 	}
 	
@@ -163,8 +161,8 @@ public class UsuarioView {
 			Usuario usuario_buscado = usuarioController.buscarPorId(id);
 			System.out.printf(usuario_buscado.toString());
 			
-		} catch( RegistroNaoEncontradoException e ) {
-			System.out.println(e.getMessage());
+		} catch( DominioException e ) {
+			System.out.println("Erro: " + e.getMessage());
 		}
 	}
 }
