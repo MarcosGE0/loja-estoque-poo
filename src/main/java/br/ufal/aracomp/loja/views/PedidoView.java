@@ -6,6 +6,9 @@ import br.ufal.aracomp.loja.exception.DominioException;
 import br.ufal.aracomp.loja.models.Cliente;
 import br.ufal.aracomp.loja.models.Pedido;
 import br.ufal.aracomp.loja.models.Usuario;
+import br.ufal.aracomp.loja.models.DescontoPromocional;
+import br.ufal.aracomp.loja.models.DescontoPorQuantidade;
+import br.ufal.aracomp.loja.models.SemDesconto;
 import java.util.Scanner;
 
 public class PedidoView {
@@ -34,6 +37,7 @@ public class PedidoView {
 			System.out.println("7 - Finalizar Pedido");
 			System.out.println("8 - Cancelar Pedido");
 			System.out.println("9 - Remover Pedido");
+			System.out.println("10 - Aplicar Desconto");
 			System.out.println("0 - Voltar ao Menu Principal");
 			System.out.print("Selecione uma opção: ");
 
@@ -62,9 +66,64 @@ public class PedidoView {
 				telaCancelarPedido();
 			} else if (opcao == 9) {
 				telaRemoverPedido();
+			} else if (opcao == 10) {
+				telaAplicarDesconto();
 			} else if (opcao != 0) {
 				System.out.println("Opção inválida!");
 			}
+		}
+	}
+
+	private void telaAplicarDesconto() {
+		System.out.print("ID do pedido: ");
+		String idPedido = scanner.nextLine();
+		System.out.println("1 - Sem desconto");
+		System.out.println("2 - Desconto promocional");
+		System.out.println("3 - Desconto por quantidade");
+		System.out.print("Tipo de desconto: ");
+
+		try {
+			int tipo = Integer.parseInt(scanner.nextLine());
+
+			if (tipo == 1) {
+				pedidoController.aplicarDesconto(idPedido, new SemDesconto());
+			} else if (tipo == 2) {
+				System.out.print("Percentual do desconto: ");
+				double percentual = Double.parseDouble(scanner.nextLine());
+				if (percentual < 0.0 || percentual > 100.0) {
+					throw new br.ufal.aracomp.loja.exception.DadoEntradaException(
+							"Percentual do desconto deve estar entre 0 e 100.");
+				}
+				pedidoController.aplicarDesconto(idPedido, new DescontoPromocional(percentual));
+			} else if (tipo == 3) {
+				System.out.print("Quantidade mínima: ");
+				int quantidadeMinima = Integer.parseInt(scanner.nextLine());
+				System.out.print("Percentual do desconto: ");
+				double percentual = Double.parseDouble(scanner.nextLine());
+				if (quantidadeMinima <= 0) {
+					throw new br.ufal.aracomp.loja.exception.DadoEntradaException(
+							"Quantidade mínima deve ser maior que zero.");
+				}
+				if (percentual < 0.0 || percentual > 100.0) {
+					throw new br.ufal.aracomp.loja.exception.DadoEntradaException(
+							"Percentual do desconto deve estar entre 0 e 100.");
+				}
+				pedidoController.aplicarDesconto(idPedido,
+						new DescontoPorQuantidade(quantidadeMinima, percentual));
+			} else {
+				System.out.println("Tipo de desconto inválido.");
+				return;
+			}
+
+			Pedido pedido = pedidoController.buscarPorId(idPedido);
+			System.out.println("Desconto aplicado!");
+			System.out.println("Tipo: " + pedido.getNomeDesconto());
+			System.out.println("Detalhe: " + pedido.getDescricaoDesconto());
+			System.out.println("Valor final: R$ " + pedido.getValorFinal());
+		} catch (NumberFormatException e) {
+			System.out.println("Valor numérico inválido!");
+		} catch (br.ufal.aracomp.loja.exception.DominioException e) {
+			System.out.println("Erro: " + e.getMessage());
 		}
 	}
 

@@ -227,6 +227,13 @@ public class PedidoService {
         }
     }
 
+    public void aplicarDesconto(String idPedido, DescontoStrategy desconto)
+            throws DadoEntradaException, RegistroNaoEncontradoException {
+        Pedido pedido = buscarPedidoAberto(idPedido);
+        pedido.aplicarDesconto(desconto);
+        pedidos.salvarAlteracoes();
+    }
+
     // Busca um pedido e exige que ele esteja aberto.
     private Pedido buscarPedidoAberto(String idPedido) throws DadoEntradaException, RegistroNaoEncontradoException {
         Pedido pedido = buscarPorId(idPedido);

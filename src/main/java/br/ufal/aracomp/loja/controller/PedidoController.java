@@ -3,6 +3,7 @@ package br.ufal.aracomp.loja.controller;
 import br.ufal.aracomp.loja.exception.*;
 import br.ufal.aracomp.loja.exception.*;
 import br.ufal.aracomp.loja.models.Pedido;
+import br.ufal.aracomp.loja.models.DescontoStrategy;
 import br.ufal.aracomp.loja.service.PedidoService;
 import java.util.List;
 
@@ -53,6 +54,11 @@ public class PedidoController {
     public void removerItemPedido(String idPedido, String idItem, int quantidade)
             throws DadoEntradaException, RegistroNaoEncontradoException {
         pedidoService.removerItemPedido(idPedido, idItem, quantidade);
+    }
+
+    public void aplicarDesconto(String idPedido, DescontoStrategy desconto)
+            throws DadoEntradaException, RegistroNaoEncontradoException {
+        pedidoService.aplicarDesconto(idPedido, desconto);
     }
 
     // Finaliza um pedido aberto.
