@@ -1,5 +1,6 @@
 package br.ufal.aracomp.loja.models;
 
+import br.ufal.aracomp.loja.exception.DadoEntradaException;
 import br.ufal.aracomp.loja.exception.*;
 
 import java.io.Serializable;

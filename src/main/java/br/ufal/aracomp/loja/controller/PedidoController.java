@@ -1,6 +1,7 @@
 package br.ufal.aracomp.loja.controller;
 
 import br.ufal.aracomp.loja.exception.*;
+import br.ufal.aracomp.loja.exception.*;
 import br.ufal.aracomp.loja.models.Pedido;
 import br.ufal.aracomp.loja.service.PedidoService;
 import java.util.List;

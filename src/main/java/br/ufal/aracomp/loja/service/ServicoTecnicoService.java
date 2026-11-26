@@ -1,5 +1,7 @@
 package br.ufal.aracomp.loja.service;
 
+import br.ufal.aracomp.loja.exception.RegistroCadastradoException;
+import br.ufal.aracomp.loja.exception.RegistroNaoEncontradoException;
 import br.ufal.aracomp.loja.models.ServicoTecnico;
 import br.ufal.aracomp.loja.repository.ServicoTecnicoRepository;
 import br.ufal.aracomp.loja.exception.*;

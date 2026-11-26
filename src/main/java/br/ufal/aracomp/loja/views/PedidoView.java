@@ -3,6 +3,7 @@ package br.ufal.aracomp.loja.views;
 import br.ufal.aracomp.loja.controller.PedidoController;
 import br.ufal.aracomp.loja.controller.UsuarioController;
 import br.ufal.aracomp.loja.exception.*;
+import br.ufal.aracomp.loja.exception.*;
 import br.ufal.aracomp.loja.models.Cliente;
 import br.ufal.aracomp.loja.models.Pedido;
 import br.ufal.aracomp.loja.models.Usuario;

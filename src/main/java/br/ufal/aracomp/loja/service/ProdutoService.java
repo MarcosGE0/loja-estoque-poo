@@ -1,4 +1,10 @@
 package br.ufal.aracomp.loja.service;
+import br.ufal.aracomp.loja.exception.DadoEntradaException;
+import br.ufal.aracomp.loja.exception.ProdutoIndisponivelException;
+import br.ufal.aracomp.loja.exception.RegistroCadastradoException;
+import br.ufal.aracomp.loja.exception.RegistroNaoEncontradoException;
+import br.ufal.aracomp.loja.models.Produto;
+import br.ufal.aracomp.loja.repository.ProdutoRepository;
 import br.ufal.aracomp.loja.repository.*;
 import br.ufal.aracomp.loja.models.*;
 import br.ufal.aracomp.loja.exception.*;
@@ -11,7 +17,7 @@ public class ProdutoService {
 		this.produtoRepository = produtoRepository;
 	}
 	
-	public void cadastrarProduto(Produto novoProduto) throws RegistroCadastradoException, DadoEntradaException  {
+	public void cadastrarProduto(Produto novoProduto) throws RegistroCadastradoException, DadoEntradaException {
 		
 		for(Produto produto_cadastrado: produtoRepository.listarProdutos()) {
 			if(produto_cadastrado.getId().equals(novoProduto.getId())) {

@@ -1,4 +1,8 @@
 package br.ufal.aracomp.loja.views;
+import br.ufal.aracomp.loja.controller.UsuarioController;
+import br.ufal.aracomp.loja.exception.RegistroCadastradoException;
+import br.ufal.aracomp.loja.exception.RegistroNaoEncontradoException;
+import br.ufal.aracomp.loja.models.Usuario;
 import br.ufal.aracomp.loja.controller.*;
 import br.ufal.aracomp.loja.exception.*;
 import br.ufal.aracomp.loja.models.*;

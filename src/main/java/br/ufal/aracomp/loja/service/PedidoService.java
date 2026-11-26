@@ -2,6 +2,11 @@ package br.ufal.aracomp.loja.service;
 
 import br.ufal.aracomp.loja.exception.*;
 import br.ufal.aracomp.loja.models.*;
+import br.ufal.aracomp.loja.repository.PedidoRepository;
+import br.ufal.aracomp.loja.repository.ProdutoRepository;
+import br.ufal.aracomp.loja.repository.UsuarioRepository;
+import br.ufal.aracomp.loja.exception.*;
+import br.ufal.aracomp.loja.models.*;
 import br.ufal.aracomp.loja.repository.*;
 import java.util.List;
 
@@ -88,7 +93,7 @@ public class PedidoService {
     // Valida o pedido e adiciona um produto, informando a quantidade desejada.
     public void adicionarProdutoPedido(String idPedido, String idProduto, int quantidade)
             throws DadoEntradaException, RegistroNaoEncontradoException,
-                   ProdutoIndisponivelException, EstoqueInsuficienteException {
+            ProdutoIndisponivelException, EstoqueInsuficienteException {
         Pedido pedido = buscarPedidoAberto(idPedido);
 
         if (quantidade <= 0) {
@@ -139,7 +144,7 @@ public class PedidoService {
     // Valida o pedido e adiciona um serviço técnico ao pedido.
     public void adicionarServicoPedido(String idPedido, String idServico, int quantidade)
             throws DadoEntradaException, RegistroNaoEncontradoException,
-                   ServicoIndisponivelException {
+            ServicoIndisponivelException {
         Pedido pedido = buscarPedidoAberto(idPedido);
 
         if (quantidade <= 0) {

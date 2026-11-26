@@ -1,4 +1,6 @@
 package br.ufal.aracomp.loja.controller;
+import br.ufal.aracomp.loja.models.*;
+import br.ufal.aracomp.loja.service.ProdutoService;
 import br.ufal.aracomp.loja.service.*;
 import br.ufal.aracomp.loja.exception.DadoEntradaException;
 import br.ufal.aracomp.loja.exception.ProdutoIndisponivelException;
