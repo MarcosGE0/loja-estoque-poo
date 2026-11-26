@@ -1,5 +1,7 @@
 package br.ufal.aracomp.loja.models;
 
-public interface DescontoStrategy {
+import java.io.Serializable;
+
+public interface DescontoStrategy extends Serializable {
 	double calcularDesconto(Pedido p);
 }

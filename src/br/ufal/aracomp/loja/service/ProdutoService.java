@@ -60,6 +60,7 @@ public class ProdutoService {
 		
 		if(produto.isDisponivel()) {
 			produto.desativar(); // mesmo se tiver em estoque, não permitir vender
+			produtoRepository.salvarAlteracoes();
 		}
 		
 		else {
@@ -80,5 +81,6 @@ public class ProdutoService {
 		
 		Produto produto = buscarPorId(id_produto);
 		produto.adicionarEstoque(qtd);
+		produtoRepository.salvarAlteracoes();
 	}
 }

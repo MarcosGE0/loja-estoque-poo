@@ -127,11 +127,13 @@ public class PedidoService {
             if (item.getItem() instanceof Produto
                     && ((Produto) item.getItem()).getId().equals(idProduto)) {
                 item.adicionarQuantidade(quantidade);
+                pedidos.salvarAlteracoes();
                 return;
             }
         }
 
         pedido.adicionarItem(new ItemPedido(quantidade, produto));
+        pedidos.salvarAlteracoes();
     }
 
     // Valida o pedido e adiciona um serviço técnico ao pedido.
@@ -164,11 +166,13 @@ public class PedidoService {
             if (item.getItem() instanceof ServicoTecnico
                     && ((ServicoTecnico) item.getItem()).getId().equals(idServico)) {
                 item.adicionarQuantidade(quantidade);
+                pedidos.salvarAlteracoes();
                 return;
             }
         }
 
         pedido.adicionarItem(new ItemPedido(quantidade, servico));
+        pedidos.salvarAlteracoes();
     }
 
     // Remove uma quantidade de um produto ou serviço pelo ID do item do pedido.
@@ -189,12 +193,14 @@ public class PedidoService {
             if (item.getItem() instanceof Produto
                     && ((Produto) item.getItem()).getId().equals(idItem)) {
                 removerQuantidadeItem(pedido, item, quantidade);
+                pedidos.salvarAlteracoes();
                 return;
             }
 
             if (item.getItem() instanceof ServicoTecnico
                     && ((ServicoTecnico) item.getItem()).getId().equals(idItem)) {
                 removerQuantidadeItem(pedido, item, quantidade);
+                pedidos.salvarAlteracoes();
                 return;
             }
         }
@@ -259,7 +265,7 @@ public class PedidoService {
         // Valida todos os produtos antes de alterar o estoque.
         for (ItemPedido item : pedido.listarItens()) {
             if (item.getItem() instanceof Produto) {
-                Produto produto = (Produto) item.getItem();
+                Produto produto = buscarProdutoCadastrado(((Produto) item.getItem()).getId());
 
                 if (!produto.isDisponivel()) {
                     throw new ProdutoIndisponivelException("Produto indisponível.");
@@ -274,17 +280,30 @@ public class PedidoService {
         // Baixa o estoque somente após todas as validações.
         for (ItemPedido item : pedido.listarItens()) {
             if (item.getItem() instanceof Produto) {
-                Produto produto = (Produto) item.getItem();
+                Produto produto = buscarProdutoCadastrado(((Produto) item.getItem()).getId());
                 produto.registrarVenda(item.getQuantidade());
             }
         }
 
         pedido.finalizarPedido();
+        produtos.salvarAlteracoes();
+        pedidos.salvarAlteracoes();
+    }
+
+    private Produto buscarProdutoCadastrado(String idProduto) throws RegistroNaoEncontradoException {
+        for (Produto produto : produtos.listarProdutos()) {
+            if (produto.getId().equals(idProduto)) {
+                return produto;
+            }
+        }
+
+        throw new RegistroNaoEncontradoException("Produto não cadastrado.");
     }
 
     // Cancela um pedido aberto.
     public void cancelarPedido(String idPedido) throws DadoEntradaException, RegistroNaoEncontradoException {
         Pedido pedido = buscarPedidoAberto(idPedido);
         pedido.cancelarPedido();
+        pedidos.salvarAlteracoes();
     }
 }

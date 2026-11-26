@@ -1,17 +1,24 @@
 package br.ufal.aracomp.loja.repository;
 
-import br.ufal.aracomp.loja.models.*;
-import java.util.*;
+import br.ufal.aracomp.loja.models.Pedido;
+import java.util.ArrayList;
+import java.util.List;
 
-public class PedidoRepository {
-    private  List<Pedido> pedidos;
+public class PedidoRepository extends ArquivoRepository<Pedido> {
+    private final List<Pedido> pedidos;
 
     public PedidoRepository() {
-        this.pedidos = new ArrayList<>();
+        super("dados/pedidos.dat");
+        this.pedidos = carregar();
     }
 
     public void adicionarPedido(Pedido pedido) {
         pedidos.add(pedido);
+        salvar(pedidos);
+    }
+
+    public void salvarAlteracoes() {
+        salvar(pedidos);
     }
 
     public Pedido buscarPedido(String idPedido) {
@@ -28,6 +35,7 @@ public class PedidoRepository {
         for (int i = 0; i < pedidos.size(); i++) {
             if (pedidos.get(i).getIdPedido().equals(idPedido)) {
                 pedidos.remove(i);
+                salvar(pedidos);
                 return;
             }
         }

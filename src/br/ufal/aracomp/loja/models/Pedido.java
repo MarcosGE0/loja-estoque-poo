@@ -1,9 +1,10 @@
 package br.ufal.aracomp.loja.models;
+import java.io.Serializable;
 import java.util.List;
 import java.util.ArrayList;
 import java.time.LocalDate; // tempo date em Python
 
-public class Pedido {
+public class Pedido implements Serializable {
 	private String id;
 	private StatusPedido status;  // ao iniciar um pedido ele é criado em ABERTO
 	private Cliente cliente;
@@ -31,7 +32,7 @@ public class Pedido {
 	}
 	
 	public List<ItemPedido> listarItens() {
-		return this.itens;
+		return new ArrayList<>(this.itens);
 	}
 	
 	public void finalizarPedido() {

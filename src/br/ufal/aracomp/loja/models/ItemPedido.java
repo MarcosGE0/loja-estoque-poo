@@ -1,6 +1,8 @@
 package br.ufal.aracomp.loja.models;
 
-public class ItemPedido {
+import java.io.Serializable;
+
+public class ItemPedido implements Serializable {
 	private int quantidade;
 	private double precoUnitario;
 	private Precificavel item;

@@ -21,6 +21,9 @@ bin/
 dist/
 *.class
 
+# Local serialized application data
+dados/
+
 # Operating system files
 .DS_Store
 Thumbs.db

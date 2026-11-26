@@ -1,6 +1,8 @@
 package br.ufal.aracomp.loja.models;
 
-public class Produto implements Precificavel {
+import java.io.Serializable;
+
+public class Produto implements Precificavel, Serializable {
 	private String id;
 	private String nome;
 	private double preco;

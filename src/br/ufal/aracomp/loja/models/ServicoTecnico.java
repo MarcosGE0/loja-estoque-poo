@@ -2,7 +2,9 @@ package br.ufal.aracomp.loja.models;
 
 import br.ufal.aracomp.loja.exception.*;
 
-public class ServicoTecnico implements Precificavel {
+import java.io.Serializable;
+
+public class ServicoTecnico implements Precificavel, Serializable {
 	private String id;
 	private String nome;
 	private double precoHora;

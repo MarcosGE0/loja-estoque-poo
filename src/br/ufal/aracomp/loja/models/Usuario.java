@@ -1,6 +1,8 @@
 package br.ufal.aracomp.loja.models;
 
-public abstract class Usuario {
+import java.io.Serializable;
+
+public abstract class Usuario implements Serializable {
 	private String id;
 	private String nome;
 	private String email;

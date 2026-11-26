@@ -1,23 +1,27 @@
 package br.ufal.aracomp.loja.repository;
 
-import br.ufal.aracomp.loja.models.*;
-import java.util.*;
+import br.ufal.aracomp.loja.models.ServicoTecnico;
+import java.util.ArrayList;
+import java.util.List;
 
-public class ServicoTecnicoRepository {
-    private List<ServicoTecnico> servicoTecnico;
+public class ServicoTecnicoRepository extends ArquivoRepository<ServicoTecnico> {
+    private final List<ServicoTecnico> servicoTecnico;
 
     public ServicoTecnicoRepository() {
-        servicoTecnico = new ArrayList<>();
+        super("dados/servicos.dat");
+        servicoTecnico = carregar();
     }
 
     public void adicionarServicoTecnico(ServicoTecnico servico) {
         servicoTecnico.add(servico);
+        salvar(servicoTecnico);
     }
 
     public void removerServicoTecnico(String idServicoTecnico) {
         for (int i = 0; i < servicoTecnico.size(); i++) {
             if (servicoTecnico.get(i).getId().equals(idServicoTecnico)) {
                 servicoTecnico.remove(i);
+                salvar(servicoTecnico);
                 return;
             }
         }

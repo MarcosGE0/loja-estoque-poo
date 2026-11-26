@@ -1,39 +1,44 @@
 package br.ufal.aracomp.loja.repository;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 import br.ufal.aracomp.loja.models.Produto;
 
-public class ProdutoRepository {
-	private List<Produto> produtos;
-	
+public class ProdutoRepository extends ArquivoRepository<Produto> {
+	private final List<Produto> produtos;
+
 	public ProdutoRepository() {
-		this.produtos = new ArrayList<Produto>();
+		super("dados/produtos.dat");
+		this.produtos = carregar();
 	}
-	
+
 	public void adicionarProduto(Produto novo_produto) {
 		this.produtos.add(novo_produto);
+		salvar(produtos);
 	}
-	
+
+	public void salvarAlteracoes() {
+		salvar(produtos);
+	}
+
 	public List<Produto> listarProdutos() {
-		return this.produtos;
+		return new ArrayList<>(this.produtos);
 	}
-	
+
 	public void removerProduto(String id_produto) {
-		// IMPLEMENTAR SISTEMA DE REMOÇÃO POR ÍNDICE
-		// Revisar essa implementação
 		int posicao_produto = -1;
 		int contador = 0;
-		
-		for(Produto produto_cadastrado: this.listarProdutos()) {
-			if(produto_cadastrado.getId().equals(id_produto)) {
+
+		for (Produto produto_cadastrado : this.produtos) {
+			if (produto_cadastrado.getId().equals(id_produto)) {
 				posicao_produto = contador;
+				break;
 			}
 			contador++;
 		}
-		
-		if(posicao_produto != -1) {
+
+		if (posicao_produto != -1) {
 			this.produtos.remove(posicao_produto);
+			salvar(produtos);
 		}
-		// na construção do service acho que tem que inserir uma excessão aqui, pq se ele naõ encontrar o produto é complicado
-		
 	}
 }
