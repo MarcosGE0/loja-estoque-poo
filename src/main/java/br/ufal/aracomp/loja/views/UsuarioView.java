@@ -148,7 +148,7 @@ public class UsuarioView {
 	
 	private void telaListarUsuarios() {
 		System.out.println("\n--- Usuários Cadastrados no Sistema ---");
-		System.out.println("ID | NOME | EMAIL | CPF/CNPJ");
+		System.out.println("ID | NOME | EMAIL | CPF/CNPJ | ATIVO");
 		for(Usuario usuario_cadastrado: usuarioController.listarUsuarios()) {
 			System.out.println(usuario_cadastrado.toString());
 		}
