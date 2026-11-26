@@ -1,8 +1,9 @@
 package br.ufal.aracomp.loja.views;
 
-import br.ufal.aracomp.loja.controller.*;
-import br.ufal.aracomp.loja.repository.*;
-import br.ufal.aracomp.loja.service.*;
+import br.ufal.aracomp.loja.controller.PedidoController;
+import br.ufal.aracomp.loja.controller.ProdutoController;
+import br.ufal.aracomp.loja.controller.ServicoTecnicoController;
+import br.ufal.aracomp.loja.controller.UsuarioController;
 import java.util.Scanner;
 
 public class MainView {
@@ -12,24 +13,8 @@ public class MainView {
 	private final ServicoTecnicoView servicoTecnicoView;
 	private final PedidoView pedidoView;
 
-	public MainView() {
+	public MainView(UsuarioController usuarioController, ProdutoController produtoController, ServicoTecnicoController servicoTecnicoController, PedidoController pedidoController) {
 		scanner = new Scanner(System.in);
-
-		UsuarioRepository usuarioRepository = new UsuarioRepository();
-		ProdutoRepository produtoRepository = new ProdutoRepository();
-		ServicoTecnicoRepository servicoTecnicoRepository = new ServicoTecnicoRepository();
-		PedidoRepository pedidoRepository = new PedidoRepository();
-
-		UsuarioService usuarioService = new UsuarioService(usuarioRepository);
-		ProdutoService produtoService = new ProdutoService(produtoRepository);
-		ServicoTecnicoService servicoTecnicoService = new ServicoTecnicoService(servicoTecnicoRepository);
-		PedidoService pedidoService = new PedidoService(pedidoRepository, usuarioRepository,
-				produtoRepository, servicoTecnicoService);
-
-		UsuarioController usuarioController = new UsuarioController(usuarioService);
-		ProdutoController produtoController = new ProdutoController(produtoService);
-		ServicoTecnicoController servicoTecnicoController = new ServicoTecnicoController(servicoTecnicoService);
-		PedidoController pedidoController = new PedidoController(pedidoService);
 
 		usuarioView = new UsuarioView(usuarioController, scanner);
 		produtoView = new ProdutoView(produtoController, scanner);
