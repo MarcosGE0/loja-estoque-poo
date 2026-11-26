@@ -1,5 +1,8 @@
 package br.ufal.aracomp.loja.models;
 
+import br.ufal.aracomp.loja.exception.DadoEntradaException;
+import br.ufal.aracomp.loja.exception.EstoqueInsuficienteException;
+
 import java.io.Serializable;
 
 public class Produto implements Precificavel, Serializable {
@@ -45,13 +48,22 @@ public class Produto implements Precificavel, Serializable {
 		this.ativo = false; // estiver desativado, ele não vende de forma alguma kkka
 	}
 	
-	public void adicionarEstoque(int qtd) { // inserir tratamento de dados para não serr inserido uma qantidade negativa
-		// inserir aqui a exceção de DadosEntradaException
+	public void adicionarEstoque(int qtd) throws DadoEntradaException {
+		if (qtd <= 0) {
+			throw new DadoEntradaException("A quantidade a adicionar deve ser maior que zero.");
+		}
+
 		this.qtdEstoque += qtd;
 	}
 	
-	public void removerEstoque(int qtd) { // inserir tratamento de dados para não serr inserido uma qantidade negativa
-		// inserir aqui a exceção de DadosEntradaException
+	public void removerEstoque(int qtd) throws DadoEntradaException, EstoqueInsuficienteException {
+		if (qtd <= 0) {
+			throw new DadoEntradaException("A quantidade a remover deve ser maior que zero.");
+		}
+		if (qtd > this.qtdEstoque) {
+			throw new EstoqueInsuficienteException("Não há estoque suficiente para remover essa quantidade.");
+		}
+
 		this.qtdEstoque -= qtd;
 	}
 	
