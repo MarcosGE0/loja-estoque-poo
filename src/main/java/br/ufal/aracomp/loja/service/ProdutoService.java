@@ -39,15 +39,15 @@ public class ProdutoService {
 		this.produtoRepository.adicionarProduto(novoProduto);
 	}
 	
-	public Produto buscarPorId(String id_produto_buscado) throws RegistroNaoEncontradoException {
+	public Produto buscarPorId(String idProduto) throws RegistroNaoEncontradoException {
 		
 		for(Produto produto_cadastrado: produtoRepository.listarProdutos()) {
-			if(produto_cadastrado.getId().equals(id_produto_buscado)) {
+			if(produto_cadastrado.getId().equals(idProduto)) {
 				return produto_cadastrado;
 			}
 		}
 		
-		throw new RegistroNaoEncontradoException("Produto com ID: " + id_produto_buscado + " não está cadastrado.");
+		throw new RegistroNaoEncontradoException("Produto com ID: " + idProduto + " não está cadastrado.");
 		
 	}
 	
@@ -57,12 +57,12 @@ public class ProdutoService {
 	}
 	
 	
-	public void desativarProduto(String id_produto_desativar) throws RegistroNaoEncontradoException, ProdutoIndisponivelException {
+	public void desativarProduto(String idProduto) throws RegistroNaoEncontradoException, ProdutoIndisponivelException {
 		// primeiro buscar na base de dados
 		// dps verificar o status
 		// se o status tiver ativado, desativa
 		
-		Produto produto = buscarPorId(id_produto_desativar);
+		Produto produto = buscarPorId(idProduto);
 		
 		if(produto.isDisponivel()) {
 			produto.desativar(); // mesmo se tiver em estoque, não permitir vender
@@ -70,23 +70,23 @@ public class ProdutoService {
 		}
 		
 		else {
-			throw new ProdutoIndisponivelException("O produto ID: " + id_produto_desativar + " já está desativado!");
+			throw new ProdutoIndisponivelException("O produto ID: " + idProduto + " já está desativado!");
 		}
 		
 	}
 	
-	public void removerProduto(String id_produto_remover) {
-		produtoRepository.removerProduto(id_produto_remover); // atenção aqui, tem que ver depois se é necessário inserir exception para validar antes se existe
+	public void removerProduto(String idProduto) {
+		produtoRepository.removerProduto(idProduto); // atenção aqui, tem que ver depois se é necessário inserir exception para validar antes se existe
 	}
 	
 	
-	public void adicionarEstoque(String id_produto, int qtd) throws RegistroNaoEncontradoException, DadoEntradaException {
-		if(qtd <= 0) {
-			throw new DadoEntradaException("Quantidade de estoque a adicionar deve ser maior que zero (recebida: " + qtd + ").");
+	public void adicionarEstoque(String idProduto, int quantidade) throws RegistroNaoEncontradoException, DadoEntradaException {
+		if(quantidade <= 0) {
+			throw new DadoEntradaException("Quantidade de estoque a adicionar deve ser maior que zero (recebida: " + quantidade + ").");
 		}
 		
-		Produto produto = buscarPorId(id_produto);
-		produto.adicionarEstoque(qtd);
+		Produto produto = buscarPorId(idProduto);
+		produto.adicionarEstoque(quantidade);
 		produtoRepository.salvarAlteracoes();
 	}
 }

@@ -26,6 +26,8 @@ public class UsuarioView {
 			System.out.println("3 - Cadastrar Administrador");
 			System.out.println("4 - Listar Usuarios");
 			System.out.println("5 - Buscar Por ID");
+			System.out.println("6 - Desativar Usuário");
+			System.out.println("7 - Remover Usuário");
 			System.out.println("0 - Voltar ao Menu Principal");
 			
 			System.out.println("Selecione uma opção: ");
@@ -59,6 +61,14 @@ public class UsuarioView {
 
 			else if(opcao == 5) {
 				telaBuscarPorId();
+			}
+
+			else if(opcao == 6) {
+				telaDesativarUsuario();
+			}
+
+			else if(opcao == 7) {
+				telaRemoverUsuario();
 			}
 		}
 	}
@@ -126,16 +136,13 @@ public class UsuarioView {
 		
 		System.out.print("E-mail: ");
 		String email = scanner.nextLine();
-		
-		System.out.print("Endereco: ");
-		String endereco = scanner.nextLine();
-		
-		System.out.print("Senha: ");
-		String senha = scanner.nextLine(); 
+
+		System.out.print("Setor: ");
+		String setor = scanner.nextLine();
 		
 
 		try {
-			usuarioController.cadastrarAdministrador(id, nome, email, endereco, senha);
+			usuarioController.cadastrarAdministrador(id, nome, email, setor);
 			System.out.println("Administrador cadastrado com sucesso!");
 		}
 		catch (DominioException e) {
@@ -162,6 +169,32 @@ public class UsuarioView {
 			System.out.printf(usuario_buscado.toString());
 			
 		} catch( DominioException e ) {
+			System.out.println("Erro: " + e.getMessage());
+		}
+	}
+
+	private void telaDesativarUsuario() {
+		System.out.println("\n--- Desativar Usuário por ID ---");
+		System.out.print("ID do usuário: ");
+		String id = scanner.nextLine();
+
+		try {
+			usuarioController.desativarUsuario(id);
+			System.out.println("Usuário desativado com sucesso!");
+		} catch (DominioException e) {
+			System.out.println("Erro: " + e.getMessage());
+		}
+	}
+
+	private void telaRemoverUsuario() {
+		System.out.println("\n--- Remover Usuário por ID ---");
+		System.out.print("ID do usuário: ");
+		String id = scanner.nextLine();
+
+		try {
+			usuarioController.removerUsuario(id);
+			System.out.println("Usuário removido com sucesso!");
+		} catch (DominioException e) {
 			System.out.println("Erro: " + e.getMessage());
 		}
 	}

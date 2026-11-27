@@ -11,8 +11,8 @@ public class ProdutoRepository extends ArquivoRepository<Produto> {
 		this.produtos = carregar();
 	}
 
-	public void adicionarProduto(Produto novo_produto) {
-		this.produtos.add(novo_produto);
+	public void adicionarProduto(Produto novoProduto) {
+		this.produtos.add(novoProduto);
 		salvar(produtos);
 	}
 
@@ -24,12 +24,12 @@ public class ProdutoRepository extends ArquivoRepository<Produto> {
 		return new ArrayList<>(this.produtos);
 	}
 
-	public void removerProduto(String id_produto) {
+	public void removerProduto(String idProduto) {
 		int posicao_produto = -1;
 		int contador = 0;
 
 		for (Produto produto_cadastrado : this.produtos) {
-			if (produto_cadastrado.getId().equals(id_produto)) {
+			if (produto_cadastrado.getId().equals(idProduto)) {
 				posicao_produto = contador;
 				break;
 			}

@@ -28,16 +28,26 @@ public class UsuarioController {
 		this.usuarioservice.cadastrarUsuario(nova_pj);
 	}
 	
-	public void cadastrarAdministrador(String id, String nome, String email, String senha, String setor) throws RegistroCadastradoException {
-		Administrador adm = new Administrador(id, nome, email, senha, setor);
+	public void cadastrarAdministrador(String id, String nome, String email, String setor) throws RegistroCadastradoException {
+		Administrador adm = new Administrador(id, nome, email, setor);
 		this.usuarioservice.cadastrarUsuario(adm);
 	}
 	
-	public Usuario buscarPorId(String id) throws RegistroNaoEncontradoException {
-		return this.usuarioservice.buscarPorId(id);
+	public Usuario buscarPorId(String idUsuario) throws RegistroNaoEncontradoException {
+		return this.usuarioservice.buscarPorId(idUsuario);
 	}
 	
 	public List<Usuario> listarUsuarios() {
 		return this.usuarioservice.listarUsuarios();
+	}
+
+	public void desativarUsuario(String idUsuario)
+			throws DadoEntradaException, RegistroNaoEncontradoException, UsuarioInativoException {
+		this.usuarioservice.desativarUsuario(idUsuario);
+	}
+
+	public void removerUsuario(String idUsuario)
+			throws DadoEntradaException, RegistroNaoEncontradoException {
+		this.usuarioservice.removerUsuario(idUsuario);
 	}
 }

@@ -36,24 +36,24 @@ public class ProdutoController {
 		produtoService.cadastrarProduto(novo_software);
 	}
 	
-	public Produto buscarPorId(String id_produto_buscado) throws RegistroNaoEncontradoException {
-		return produtoService.buscarPorId(id_produto_buscado);
+	public Produto buscarPorId(String idProduto) throws RegistroNaoEncontradoException {
+		return produtoService.buscarPorId(idProduto);
 	}
 	
 	public List<Produto> listarProdutos() {
 		return produtoService.listarProdutos();
 	}
 	
-	public void desativarProduto(String id_produto_desativar) throws ProdutoIndisponivelException, RegistroNaoEncontradoException {
-		produtoService.desativarProduto(id_produto_desativar);
+	public void desativarProduto(String idProduto) throws ProdutoIndisponivelException, RegistroNaoEncontradoException {
+		produtoService.desativarProduto(idProduto);
 	}
 	
-	public void removerProduto(String id_produto_remover) {
-		produtoService.removerProduto(id_produto_remover);
+	public void removerProduto(String idProduto) {
+		produtoService.removerProduto(idProduto);
 	}
 	
-	public void adicionarEstoque(String id_produto, int qtd) throws RegistroNaoEncontradoException, DadoEntradaException {
-		produtoService.adicionarEstoque(id_produto, qtd);
+	public void adicionarEstoque(String idProduto, int quantidade) throws RegistroNaoEncontradoException, DadoEntradaException {
+		produtoService.adicionarEstoque(idProduto, quantidade);
 	}
 	
 }

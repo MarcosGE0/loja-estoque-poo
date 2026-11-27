@@ -16,13 +16,17 @@ public class UsuarioRepository extends ArquivoRepository<Usuario> {
 		salvar(usuarios);
 	}
 
+	public void salvarAlteracoes() {
+		salvar(usuarios);
+	}
+
 	public List<Usuario> listarUsuarios() {
 		return new ArrayList<>(this.usuarios);
 	}
 
-	public void removerUsuario(String id) {
+	public void removerUsuario(String idUsuario) {
 		for (int i = 0; i < usuarios.size(); i++) {
-			if (usuarios.get(i).getId().equals(id)) {
+			if (usuarios.get(i).getId().equals(idUsuario)) {
 				usuarios.remove(i);
 				salvar(usuarios);
 				return;

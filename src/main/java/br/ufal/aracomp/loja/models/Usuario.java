@@ -30,6 +30,10 @@ public abstract class Usuario implements Serializable {
 	public String getId() { // vou precisar do acesso para validar se já existe um registro com o mesmo id
 		return this.id;
 	}
+
+	public void desativar() {
+		this.ativo = false;
+	}
 	
 	public String toString() {
 		return String.format("%s | %s | %s | %s ", this.getId(), this.getNome(), this.getEmail(), this.isAtivo());
