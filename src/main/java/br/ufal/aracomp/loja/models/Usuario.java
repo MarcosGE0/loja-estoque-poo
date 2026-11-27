@@ -1,5 +1,7 @@
 package br.ufal.aracomp.loja.models;
 
+import br.ufal.aracomp.loja.exception.DadoEntradaException;
+
 import java.io.Serializable;
 
 public abstract class Usuario implements Serializable {
@@ -8,7 +10,17 @@ public abstract class Usuario implements Serializable {
 	private String email;
 	private boolean ativo;
 	
-	public Usuario(String id, String nome, String email) {
+	public Usuario(String id, String nome, String email) throws DadoEntradaException {
+		if (id == null || id.isBlank()) {
+			throw new DadoEntradaException("ID do usuário não pode ser vazio.");
+		}
+		if (nome == null || nome.isBlank()) {
+			throw new DadoEntradaException("Nome do usuário não pode ser vazio.");
+		}
+		if (email == null || email.isBlank()) {
+			throw new DadoEntradaException("E-mail do usuário não pode ser vazio.");
+		}
+
 		this.id = id;
 		this.nome = nome;
 		this.email = email;

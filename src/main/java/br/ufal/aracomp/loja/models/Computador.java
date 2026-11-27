@@ -1,11 +1,13 @@
 package br.ufal.aracomp.loja.models;
 
+import br.ufal.aracomp.loja.exception.DadoEntradaException;
+
 public class Computador extends Produto {
 	private String processador;
 	private int memoriaRam;
 	private String sistemaOperacional;
 	
-	public Computador(String id, String nome, double preco, int qtdEstoque, String processador, int memoriaRam, String sistemaOperacional) {
+	public Computador(String id, String nome, double preco, int qtdEstoque, String processador, int memoriaRam, String sistemaOperacional) throws DadoEntradaException {
 		super(id, nome, preco, qtdEstoque);
 		this.processador = processador;
 		this.memoriaRam = memoriaRam;

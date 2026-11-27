@@ -1,9 +1,11 @@
 package br.ufal.aracomp.loja.models;
 
+import br.ufal.aracomp.loja.exception.DadoEntradaException;
+
 public abstract class Cliente extends Usuario {
 	private String endereco;
 	
-	public Cliente(String id, String nome, String email, String endereco) {
+	public Cliente(String id, String nome, String email, String endereco) throws DadoEntradaException {
 		super(id, nome, email);
 		this.endereco = endereco;
 	}
@@ -12,7 +14,5 @@ public abstract class Cliente extends Usuario {
 		return this.endereco;
 	}
 	
-	public String getDocumentacao() {
-		return this.endereco;
-	}
+	public abstract String getDocumentacao();
 }

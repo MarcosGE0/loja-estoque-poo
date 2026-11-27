@@ -9,6 +9,7 @@ import br.ufal.aracomp.loja.exception.ProdutoIndisponivelException;
 import br.ufal.aracomp.loja.exception.RegistroCadastradoException;
 import br.ufal.aracomp.loja.exception.RegistroNaoEncontradoException;
 import br.ufal.aracomp.loja.models.Produto;
+import br.ufal.aracomp.loja.models.Periferico;
 import br.ufal.aracomp.loja.repository.ProdutoRepository;
 import java.nio.file.Path;
 import org.junit.jupiter.api.BeforeEach;
@@ -30,24 +31,24 @@ public class ProdutoServiceTest {
 
     @Test
     public void cadastraProdutoERejeitaIdDuplicado() throws Exception {
-        service.cadastrarProduto(new Produto("p1", "Mouse", 50.0, 5));
+        service.cadastrarProduto(new Periferico("p1", "Mouse", 50.0, 5, "USB"));
 
         assertThrows(RegistroCadastradoException.class,
-                () -> service.cadastrarProduto(new Produto("p1", "Teclado", 80.0, 3)));
+                () -> service.cadastrarProduto(new Periferico("p1", "Teclado", 80.0, 3, "USB")));
         assertEquals(1, service.listarProdutos().size());
     }
 
     @Test
     public void rejeitaProdutoComPrecoOuEstoqueInvalido() {
         assertThrows(DadoEntradaException.class,
-                () -> service.cadastrarProduto(new Produto("p1", "Mouse", 0.0, 5)));
+                () -> service.cadastrarProduto(new Periferico("p1", "Mouse", 0.0, 5, "USB")));
         assertThrows(DadoEntradaException.class,
-                () -> service.cadastrarProduto(new Produto("p2", "Mouse", 50.0, 0)));
+                () -> service.cadastrarProduto(new Periferico("p2", "Mouse", 50.0, 0, "USB")));
     }
 
     @Test
     public void adicionaEstoqueERejeitaQuantidadeInvalida() throws Exception {
-        service.cadastrarProduto(new Produto("p1", "Mouse", 50.0, 5));
+        service.cadastrarProduto(new Periferico("p1", "Mouse", 50.0, 5, "USB"));
 
         service.adicionarEstoque("p1", 3);
 
@@ -58,7 +59,7 @@ public class ProdutoServiceTest {
 
     @Test
     public void desativaProdutoEImpedeDesativacaoRepetida() throws Exception {
-        service.cadastrarProduto(new Produto("p1", "Mouse", 50.0, 5));
+        service.cadastrarProduto(new Periferico("p1", "Mouse", 50.0, 5, "USB"));
 
         service.desativarProduto("p1");
 

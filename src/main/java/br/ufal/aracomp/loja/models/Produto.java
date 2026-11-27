@@ -5,14 +5,27 @@ import br.ufal.aracomp.loja.exception.EstoqueInsuficienteException;
 
 import java.io.Serializable;
 
-public class Produto implements Precificavel, Serializable {
+public abstract class Produto implements Precificavel, Serializable {
 	private String id;
 	private String nome;
 	private double preco;
 	private boolean ativo; 
 	private int qtdEstoque;
 	
-	public Produto(String id, String nome, double preco, int qtdEstoque) {
+	public Produto(String id, String nome, double preco, int qtdEstoque) throws DadoEntradaException {
+		if (id == null || id.isBlank()) {
+			throw new DadoEntradaException("ID do produto não pode ser vazio.");
+		}
+		if (nome == null || nome.isBlank()) {
+			throw new DadoEntradaException("Nome do produto não pode ser vazio.");
+		}
+		if (!Double.isFinite(preco) || preco <= 0) {
+			throw new DadoEntradaException("Preço do produto deve ser maior que zero.");
+		}
+		if (qtdEstoque <= 0) {
+			throw new DadoEntradaException("Quantidade em estoque deve ser maior que zero.");
+		}
+
 		this.id = id;
 		this.nome = nome;
 		this.preco = preco;
@@ -67,8 +80,8 @@ public class Produto implements Precificavel, Serializable {
 		this.qtdEstoque -= qtd;
 	}
 	
-	public void registrarVenda(int qtd) {
-		this.qtdEstoque -= qtd;
+	public void registrarVenda(int qtd) throws DadoEntradaException, EstoqueInsuficienteException {
+		removerEstoque(qtd);
 	}
 	
 }

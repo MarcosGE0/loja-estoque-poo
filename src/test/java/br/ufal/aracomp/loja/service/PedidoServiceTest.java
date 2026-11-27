@@ -10,6 +10,7 @@ import br.ufal.aracomp.loja.models.Cliente;
 import br.ufal.aracomp.loja.models.Pedido;
 import br.ufal.aracomp.loja.models.PessoaFisica;
 import br.ufal.aracomp.loja.models.Produto;
+import br.ufal.aracomp.loja.models.Periferico;
 import br.ufal.aracomp.loja.models.StatusPedido;
 import br.ufal.aracomp.loja.repository.PedidoRepository;
 import br.ufal.aracomp.loja.repository.ProdutoRepository;
@@ -43,7 +44,7 @@ public class PedidoServiceTest {
 
         cliente = new PessoaFisica("c1", "Ana", "ana@email.com", "Rua A", "documento");
         usuarioRepository.adicionarUsuario(cliente);
-        produto = new Produto("p1", "Mouse", 50.0, 5);
+        produto = new Periferico("p1", "Mouse", 50.0, 5, "USB");
         produtoRepository.adicionarProduto(produto);
     }
 

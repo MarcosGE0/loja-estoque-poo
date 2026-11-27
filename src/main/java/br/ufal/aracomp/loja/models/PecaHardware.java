@@ -1,9 +1,11 @@
 package br.ufal.aracomp.loja.models;
 
+import br.ufal.aracomp.loja.exception.DadoEntradaException;
+
 public class PecaHardware extends Produto {
 	private String compatibilidade;
 	
-	public PecaHardware(String id, String nome, double preco, int qtdEstoque, String compatibilidade) {
+	public PecaHardware(String id, String nome, double preco, int qtdEstoque, String compatibilidade) throws DadoEntradaException {
 		super(id, nome, preco, qtdEstoque);
 		this.compatibilidade = compatibilidade;
 	}

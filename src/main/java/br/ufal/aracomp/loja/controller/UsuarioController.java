@@ -30,7 +30,7 @@ public class UsuarioController {
 		this.usuarioservice.cadastrarUsuario(nova_pj);
 	}
 	
-	public void cadastrarAdministrador(String id, String nome, String email, String setor) throws RegistroCadastradoException, PersistenciaException {
+	public void cadastrarAdministrador(String id, String nome, String email, String setor) throws RegistroCadastradoException, DadoEntradaException, PersistenciaException {
 		Administrador adm = new Administrador(id, nome, email, setor);
 		this.usuarioservice.cadastrarUsuario(adm);
 	}

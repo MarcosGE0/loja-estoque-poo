@@ -32,4 +32,12 @@ public class ValidadorDocumentoTest {
         assertThrows(DadoEntradaException.class,
                 () -> new PessoaJuridica("u2", "Loja", "loja@email.com", "Rua B", ""));
     }
+
+    @Test
+    public void usuarioRejeitaCamposComunsVazios() {
+        assertThrows(DadoEntradaException.class,
+                () -> new PessoaFisica("u1", " ", "ana@email.com", "Rua A", "CPF"));
+        assertThrows(DadoEntradaException.class,
+                () -> new PessoaFisica("u1", "Ana", " ", "Rua A", "CPF"));
+    }
 }

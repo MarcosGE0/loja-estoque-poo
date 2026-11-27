@@ -1,9 +1,11 @@
 package br.ufal.aracomp.loja.models;
 
+import br.ufal.aracomp.loja.exception.DadoEntradaException;
+
 public class Periferico extends Produto {
 	private String conexao;
 
-	public Periferico(String id, String nome, double preco, int qtdEstoque, String conexao) {
+	public Periferico(String id, String nome, double preco, int qtdEstoque, String conexao) throws DadoEntradaException {
 		super(id, nome, preco, qtdEstoque);
 		this.conexao = conexao;
 	}

@@ -12,7 +12,7 @@ public class PedidoTest {
     public void aplicaDescontoPromocionalAoPedido() throws Exception {
         Cliente cliente = new PessoaFisica("c1", "Ana", "ana@email.com", "Rua A", "529.982.247-25");
         Pedido pedido = new Pedido("p1", cliente, "2026-11-26");
-        pedido.adicionarItem(new ItemPedido(2, new Produto("x1", "Mouse", 50.0, 10)));
+        pedido.adicionarItem(new ItemPedido(2, new Periferico("x1", "Mouse", 50.0, 10, "USB")));
         pedido.aplicarDesconto(new DescontoPromocional(10.0));
 
         assertEquals(100.0, pedido.getValorBruto());
@@ -24,7 +24,7 @@ public class PedidoTest {
     public void aplicaDescontoPorQuantidadeQuandoMinimoEAtendido() throws Exception {
         Cliente cliente = new PessoaFisica("c1", "Ana", "ana@email.com", "Rua A", "529.982.247-25");
         Pedido pedido = new Pedido("p1", cliente, "2026-11-26");
-        pedido.adicionarItem(new ItemPedido(3, new Produto("x1", "Mouse", 20.0, 10)));
+        pedido.adicionarItem(new ItemPedido(3, new Periferico("x1", "Mouse", 20.0, 10, "USB")));
         pedido.aplicarDesconto(new DescontoPorQuantidade(3, 20.0));
 
         assertEquals(12.0, pedido.getValorDesconto());
@@ -56,7 +56,7 @@ public class PedidoTest {
     public void valorFinalAplicadoPermaneceAposFinalizar() throws Exception {
         Cliente cliente = new PessoaFisica("c1", "Ana", "ana@email.com", "Rua A", "529.982.247-25");
         Pedido pedido = new Pedido("p1", cliente, "2026-11-26");
-        pedido.adicionarItem(new ItemPedido(2, new Produto("x1", "Mouse", 50.0, 10)));
+        pedido.adicionarItem(new ItemPedido(2, new Periferico("x1", "Mouse", 50.0, 10, "USB")));
         pedido.aplicarDesconto(new DescontoPromocional(10.0));
         pedido.finalizarPedido();
 
@@ -68,7 +68,7 @@ public class PedidoTest {
     public void recalculaDescontoQuandoQuantidadeDoPedidoMuda() throws Exception {
         Cliente cliente = new PessoaFisica("c1", "Ana", "ana@email.com", "Rua A", "529.982.247-25");
         Pedido pedido = new Pedido("p1", cliente, "2026-11-26");
-        ItemPedido item = new ItemPedido(2, new Produto("x1", "Mouse", 20.0, 10));
+        ItemPedido item = new ItemPedido(2, new Periferico("x1", "Mouse", 20.0, 10, "USB"));
         pedido.adicionarItem(item);
         pedido.aplicarDesconto(new DescontoPorQuantidade(3, 20.0));
 
@@ -84,7 +84,7 @@ public class PedidoTest {
     public void removeDescontoComSemDesconto() throws Exception {
         Cliente cliente = new PessoaFisica("c1", "Ana", "ana@email.com", "Rua A", "529.982.247-25");
         Pedido pedido = new Pedido("p1", cliente, "2026-11-26");
-        pedido.adicionarItem(new ItemPedido(2, new Produto("x1", "Mouse", 50.0, 10)));
+        pedido.adicionarItem(new ItemPedido(2, new Periferico("x1", "Mouse", 50.0, 10, "USB")));
         pedido.aplicarDesconto(new DescontoPromocional(10.0));
         pedido.aplicarDesconto(new SemDesconto());
 
@@ -97,12 +97,12 @@ public class PedidoTest {
     public void impedeAlteracoesAposFinalizar() throws Exception {
         Cliente cliente = new PessoaFisica("c1", "Ana", "ana@email.com", "Rua A", "529.982.247-25");
         Pedido pedido = new Pedido("p1", cliente, "2026-11-26");
-        ItemPedido item = new ItemPedido(2, new Produto("x1", "Mouse", 50.0, 10));
+        ItemPedido item = new ItemPedido(2, new Periferico("x1", "Mouse", 50.0, 10, "USB"));
         pedido.adicionarItem(item);
         pedido.finalizarPedido();
 
         assertThrows(DadoEntradaException.class,
-                () -> pedido.adicionarItem(new ItemPedido(1, new Produto("x2", "Teclado", 30.0, 10))));
+                () -> pedido.adicionarItem(new ItemPedido(1, new Periferico("x2", "Teclado", 30.0, 10, "USB"))));
         assertThrows(DadoEntradaException.class, () -> pedido.removerItem(item));
         assertThrows(DadoEntradaException.class,
                 () -> pedido.aplicarDesconto(new DescontoPromocional(20.0)));

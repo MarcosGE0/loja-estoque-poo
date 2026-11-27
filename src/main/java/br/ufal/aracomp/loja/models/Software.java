@@ -1,10 +1,12 @@
 package br.ufal.aracomp.loja.models;
 
+import br.ufal.aracomp.loja.exception.DadoEntradaException;
+
 public class Software extends Produto {
 	private String chaveAtivacao;
 	private String plataforma;
 	
-	public Software(String id, String nome, double preco, int qtdEstoque, String chaveAtivacao, String plataforma) {
+	public Software(String id, String nome, double preco, int qtdEstoque, String chaveAtivacao, String plataforma) throws DadoEntradaException {
 		super(id, nome, preco, qtdEstoque);
 		this.chaveAtivacao = chaveAtivacao;
 		this.plataforma = plataforma;
