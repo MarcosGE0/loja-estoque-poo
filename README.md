@@ -158,7 +158,7 @@ Os dados são persistidos em arquivos locais dentro do diretório `dados`, usand
 
 - `dados/usuarios.dat`
 - `dados/produtos.dat`
-- `dados/servicos_tecnicos.dat`
+- `dados/servicos.dat`
 - `dados/pedidos.dat`
 
 As operações de leitura e escrita ficam centralizadas nas classes repository.
