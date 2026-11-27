@@ -13,10 +13,9 @@ O projeto foi desenvolvido no contexto da disciplina Programação Orientada a O
 ## Requisitos
 
 - Java 21 ou superior
-- Maven
-- Git
+- Git, caso queira clonar o projeto pelo terminal
 
-## Execução
+## Como baixar e executar
 
 Clone o repositório:
 
@@ -25,26 +24,35 @@ git clone https://github.com/MarcosGE0/loja-estoque-poo.git
 cd loja-estoque-poo
 ```
 
-Compile o projeto:
+Também é possível baixar o projeto como ZIP pelo GitHub, extrair os arquivos e abrir o terminal na pasta do projeto.
 
-```bash
-mvn compile
-```
+### Windows
 
-Gere o pacote da aplicação:
-
-```bash
-mvn package
-```
-
-No terminal do Windows, compile e execute com os comandos abaixo:
+No PowerShell, dentro da pasta do projeto:
 
 ```powershell
+java -version
+javac -version
 New-Item -ItemType Directory -Force target/classes
-$sources = Get-ChildItem src/main/java -Recurse -Filter *.java |
-    ForEach-Object { $_.FullName }
-javac -encoding UTF-8 -d target/classes $sources
+$arquivos = Get-ChildItem src/main/java -Recurse -Filter *.java
+javac -encoding UTF-8 -d target/classes $arquivos.FullName
 java -cp target/classes br.ufal.aracomp.loja.Main
+```
+
+Os dois primeiros comandos verificam se o Java está instalado. Os demais compilam e iniciam o sistema.
+
+### Linux ou macOS
+
+No terminal, dentro da pasta do projeto:
+
+```bash
+java -version
+javac -version
+mkdir -p target/classes
+find src/main/java -name "*.java" > sources.txt
+javac -encoding UTF-8 -d target/classes @sources.txt
+java -cp target/classes br.ufal.aracomp.loja.Main
+rm sources.txt
 ```
 
 ## Funcionalidades
@@ -167,9 +175,7 @@ Exemplos:
 
 ## Testes
 
-Os testes automatizados utilizam JUnit.
-
-Para executar os testes:
+Os testes automatizados utilizam JUnit e podem ser executados com Maven:
 
 ```bash
 mvn test
@@ -183,6 +189,6 @@ https://drive.google.com/file/d/1KFozWWmDvlg4820GcrwlxFFWujZolUz4/view?usp=drive
 
 ## Uso de IA
 
-Ferramentas de inteligência artificial foram utilizadas como apoio ao estudo do projeto. A IA auxiliou na compreensão de conceitos, revisão de arquitetura, proposta de correções e organização da documentação.
+Ferramentas de inteligência artificial foram utilizadas como apoio ao estudo do projeto, incluindo a compreensão de conceitos, revisão de arquitetura, sugestões de correções e organização da documentação.
 
-As decisões finais, revisões do código, testes, implementação de funções, regras de negócio e validações foram realizadas pelos integrantes do grupo.
+As decisões finais, revisões do código, testes, implementação de funções, classes, interfaces, associações entre classes, regras de negócio e validações foram realizadas pelos integrantes do grupo.
