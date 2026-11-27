@@ -24,8 +24,6 @@ public class PessoaJuridica extends Cliente {
 	}
 	
 	@Override
-	// polimorfimos de sobrecrita salva aq pq eu sobrescrevo para aparecer no views o cpf ou cnpj, 
-	// identificando se é pessoa física ou jurídica
 	public String toString() {
 		return String.format("%s | %s | %s | CNPJ: %s | %s", this.getId(), this.getNome(), this.getEmail(), this.cnpj, this.isAtivo());
 	}

@@ -114,7 +114,7 @@ public class UsuarioView {
 		String endereco = scanner.nextLine();
 		
 		System.out.print("CNPJ: ");
-		String cnpj = scanner.nextLine(); // possivelmente inserir tratamento do CNPJ
+		String cnpj = scanner.nextLine();
 		
 		try {
 			usuarioController.cadastrarPessoaJuridica(id, nome, email, endereco, cnpj);

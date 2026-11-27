@@ -13,14 +13,13 @@ public class UsuarioService {
 	private UsuarioRepository usuarioRepository;
 	
 	public UsuarioService(UsuarioRepository usuarioRepository) {
-		this.usuarioRepository = usuarioRepository; // no construtor UsuarioRepository eu inicio um atributo ArrayList<Usuario>()
+		this.usuarioRepository = usuarioRepository;
 	}
 	
 	public void cadastrarUsuario(Usuario novoUsuario) throws RegistroCadastradoException {
-		// regra de negócio: unicidade de e-mail, cpf ou cnpj nos dados, para isso temos que percorrer os registros
 		
-		for(Usuario usuario_cadastrado: usuarioRepository.listarUsuarios()) { // percorrer todos os registros de usuários cadastrados
-			if(usuario_cadastrado.getEmail().equals(novoUsuario.getEmail())) { // e ver se tem algum email cadastrado
+		for(Usuario usuario_cadastrado: usuarioRepository.listarUsuarios()) {
+			if(usuario_cadastrado.getEmail().equals(novoUsuario.getEmail())) {
 				throw new RegistroCadastradoException("E-mail já utilizado: " + novoUsuario.getEmail() + ".");
 			}
 			
@@ -46,17 +45,16 @@ public class UsuarioService {
 			}
 		}
 		
-		this.usuarioRepository.adicionarUsuario(novoUsuario); // se passar por todas as regras
+		this.usuarioRepository.adicionarUsuario(novoUsuario);
 	}
 	
 	public Usuario buscarPorId(String idUsuario) throws RegistroNaoEncontradoException {
-		for (Usuario usuario_cadastrado: usuarioRepository.listarUsuarios()) { // percorrer toda a lista de usuários cadastrados
+		for (Usuario usuario_cadastrado: usuarioRepository.listarUsuarios()) {
 			if(usuario_cadastrado.getId().equals(idUsuario)) {
 				return usuario_cadastrado;
 			}
 		}
 		throw new RegistroNaoEncontradoException("Usuário com ID: " + idUsuario + " não está cadastrado.");
-		// tem que jgoar a exceção pq esse metodo tem que retornar o tipo Usuário
 	}
 	
 	public List<Usuario> listarUsuarios() {

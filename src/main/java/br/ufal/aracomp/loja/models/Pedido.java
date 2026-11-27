@@ -7,9 +7,9 @@ import br.ufal.aracomp.loja.exception.DadoEntradaException;
 
 public class Pedido implements Serializable {
 	private String id;
-	private StatusPedido status;  // ao iniciar um pedido ele é criado em ABERTO
+	private StatusPedido status;
 	private Cliente cliente;
-	private List<ItemPedido> itens; // relacionamento da composição
+	private List<ItemPedido> itens;
 	private DescontoStrategy desconto;
 	private String dataCriacao;
 	private String dataFinalizacao;
@@ -22,7 +22,7 @@ public class Pedido implements Serializable {
 		this.cliente = cliente;
 		this.itens = new ArrayList<ItemPedido>();
 		this.dataCriacao = dataCriacao;
-		this.dataFinalizacao = null; // só atualkzia quando o status for para FINALIZADO
+		this.dataFinalizacao = null;
 		this.desconto = new SemDesconto();
 		this.valorDescontoAplicado = 0.0;
 		this.valorFinalAplicado = 0.0;
@@ -53,7 +53,7 @@ public class Pedido implements Serializable {
 		this.valorDescontoAplicado = this.getValorDesconto();
 		this.valorFinalAplicado = this.getValorBruto() - this.valorDescontoAplicado;
 		this.status = StatusPedido.FINALIZADO;
-		this.dataFinalizacao = LocalDate.now().toString(); // eu tava pensando em passar a data também via parâmetros, não sei, validar com os guys
+		this.dataFinalizacao = LocalDate.now().toString();
 	}
 
 	public void cancelarPedido() throws DadoEntradaException {
@@ -64,12 +64,10 @@ public class Pedido implements Serializable {
 		this.dataFinalizacao = LocalDate.now().toString();
 	}
 	
-	public double getValorBruto() { // valor bruto é o valor sem desconto
+	public double getValorBruto() {
 		double valorBruto = 0;
 		
-		for(ItemPedido itemCarrinho: this.itens) { // o atributo itens é semelhante a um carrinho do ecomerce, tipo
-			// em itemproduto é como se fosse cada item no carrinho, no meu carrinho do Mercado Livre tem:
-			// 3 camisas (subtotal: quantidade x preco unitario da camisa) + 2x mochinas (subtotal: quantidade x preco unitário da mochila)
+		for(ItemPedido itemCarrinho: this.itens) {
 			valorBruto += itemCarrinho.calcularSubtotal();
 		}
 		

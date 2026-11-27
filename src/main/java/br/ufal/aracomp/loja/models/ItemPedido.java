@@ -10,8 +10,7 @@ public class ItemPedido implements Serializable {
 	public ItemPedido(int quantidade, Precificavel item) {
 		this.quantidade = quantidade;
 		this.item = item;
-		this.precoUnitario = item.getPreco(); // esse atributo é importante pois salva o histórico se o valor do produto mudar
-		// tipo, se comprou algo por 40 e alterar para 34, mantem o histório para não ocorrer um efeito cascata
+		this.precoUnitario = item.getPreco();
 	}
 	
 	public double calcularSubtotal() {
@@ -20,7 +19,7 @@ public class ItemPedido implements Serializable {
 		return subtotal;
 	}
 	
-	public int getQuantidade() { // precisei do encapulusamento desse atributo para poder usar nos descontos
+	public int getQuantidade() {
 		return this.quantidade;
 	}
 

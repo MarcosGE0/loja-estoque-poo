@@ -96,7 +96,7 @@ public class ProdutoView {
 		
 		System.out.print("Quantidade Estoque (uni): ");
 		int qtd_estoque = scanner.nextInt();
-		scanner.nextLine(); // tem que colocar pra pular sneão bugar o scanner kkkk
+		scanner.nextLine();
 		
 		System.out.print("Conexão: ");
 		String conexao = scanner.nextLine();
@@ -234,7 +234,6 @@ public class ProdutoView {
 		System.out.print("ID do Produto: ");
 		String id = scanner.nextLine();
 		
-		// seria interessante colocar uma mensagem de confirmaação aq
 		
 		try {
 			produtoController.desativarProduto(id);
@@ -251,9 +250,6 @@ public class ProdutoView {
 		System.out.print("ID do Produto: ");
 		String id = scanner.nextLine();
 		
-		// seria interessante colocar uma mensagem de confirmaação aq, tipo: 
-		// Deseja mesmo remover esse registro do banco de dados? 
-		// pensando bem essa opção deve ser utilizada com cuidado, devido a integridade relacional do banco de dados
 		
 		produtoController.removerProduto(id);
 		System.out.println("Produto removido com êxito!");

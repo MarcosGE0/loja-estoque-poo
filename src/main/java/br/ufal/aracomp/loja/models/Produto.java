@@ -16,7 +16,7 @@ public class Produto implements Precificavel, Serializable {
 		this.id = id;
 		this.nome = nome;
 		this.preco = preco;
-		this.ativo = true; // decidi que por padrão, ao criar o produto e colocar em estoque ele já está disponível
+		this.ativo = true;
 		this.qtdEstoque = qtdEstoque;
 	}
 	
@@ -44,8 +44,8 @@ public class Produto implements Precificavel, Serializable {
 		return this.qtdEstoque;
 	}
 	
-	public void desativar() { // estabelecemos que, mesmo se tiver estoque, e esse atributo
-		this.ativo = false; // estiver desativado, ele não vende de forma alguma kkka
+	public void desativar() {
+		this.ativo = false;
 	}
 	
 	public void adicionarEstoque(int qtd) throws DadoEntradaException {

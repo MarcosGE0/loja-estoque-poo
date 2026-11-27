@@ -12,7 +12,7 @@ public abstract class Usuario implements Serializable {
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
-		this.ativo = true; // um usuário é criado com o status de ativo, não sendo necessário passar como parâmetro
+		this.ativo = true;
 	}
 	
 	public String getNome() {
@@ -23,11 +23,11 @@ public abstract class Usuario implements Serializable {
 		return this.ativo;
 	}
 	
-	public String getEmail() { // vou precisar do acesso para validar se já existe um registro com o mesmo email
+	public String getEmail() {
 		return this.email;
 	}
 	
-	public String getId() { // vou precisar do acesso para validar se já existe um registro com o mesmo id
+	public String getId() {
 		return this.id;
 	}
 

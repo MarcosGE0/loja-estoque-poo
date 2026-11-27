@@ -186,9 +186,10 @@ mvn test
 
 ## UML
 
-A modelagem UML do projeto está disponível no seguinte link:
+A modelagem UML do projeto está disponível em `docs/`:
 
-https://drive.google.com/file/d/1KFozWWmDvlg4820GcrwlxFFWujZolUz4/view?usp=drive_link
+- `Loja de Informática - Diagrama de classes.svg`: diagrama para visualização.
+- `Loja de Informática - Diagrama de classes.xml`: arquivo-fonte editável do diagrama.
 
 ## Uso de IA
 

@@ -16,14 +16,12 @@ public class PedidoView {
 	private UsuarioController usuarioController;
 	private Scanner scanner;
 
-	// Recebe os controllers e o scanner usados pelo menu de pedidos.
 	public PedidoView(PedidoController pedidoController, UsuarioController usuarioController, Scanner scanner) {
 		this.pedidoController = pedidoController;
 		this.usuarioController = usuarioController;
 		this.scanner = scanner;
 	}
 
-	// Exibe o menu principal das operações de pedido.
 	public void exibirMenu() {
 		int opcao = -1;
 		while (opcao != 0) {
@@ -127,7 +125,6 @@ public class PedidoView {
 		}
 	}
 
-	// Solicita os dados e cadastra um novo pedido.
 	private void telaCadastrarPedido() {
 		System.out.println("\n--- Cadastro de Pedido ---");
 		System.out.print("ID do pedido: ");
@@ -152,7 +149,6 @@ public class PedidoView {
 		}
 	}
 
-	// Lista todos os pedidos cadastrados.
 	private void telaListarPedidos() {
 		System.out.println("\n--- Pedidos Cadastrados ---");
 		if (pedidoController.listarPedidos().isEmpty()) {
@@ -165,7 +161,6 @@ public class PedidoView {
 		}
 	}
 
-	// Busca e exibe um pedido pelo ID.
 	private void telaBuscarPedido() {
 		System.out.print("ID do pedido: ");
 		String idPedido = scanner.nextLine();
@@ -177,7 +172,6 @@ public class PedidoView {
 		}
 	}
 
-	// Solicita os dados e adiciona um produto ao pedido.
 	private void telaAdicionarProduto() {
 		System.out.print("ID do pedido: ");
 		String idPedido = scanner.nextLine();
@@ -196,7 +190,6 @@ public class PedidoView {
 		}
 	}
 
-	// Solicita os dados e adiciona um serviço técnico ao pedido.
 	private void telaAdicionarServico() {
 		System.out.print("ID do pedido: ");
 		String idPedido = scanner.nextLine();
@@ -215,7 +208,6 @@ public class PedidoView {
 		}
 	}
 
-	// Solicita os dados e remove uma quantidade de um item.
 	private void telaRemoverItem() {
 		System.out.print("ID do pedido: ");
 		String idPedido = scanner.nextLine();
@@ -234,7 +226,6 @@ public class PedidoView {
 		}
 	}
 
-	// Solicita o ID e finaliza um pedido.
 	private void telaFinalizarPedido() {
 		System.out.print("ID do pedido: ");
 		String idPedido = scanner.nextLine();
@@ -247,7 +238,6 @@ public class PedidoView {
 		}
 	}
 
-	// Solicita o ID e cancela um pedido.
 	private void telaCancelarPedido() {
 		System.out.print("ID do pedido: ");
 		String idPedido = scanner.nextLine();
@@ -260,7 +250,6 @@ public class PedidoView {
 		}
 	}
 
-	// Solicita o ID e remove um pedido.
 	private void telaRemoverPedido() {
 		System.out.print("ID do pedido: ");
 		String idPedido = scanner.nextLine();

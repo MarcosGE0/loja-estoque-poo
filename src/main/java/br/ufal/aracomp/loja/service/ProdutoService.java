@@ -33,8 +33,6 @@ public class ProdutoService {
 			throw new DadoEntradaException("Quantidade em estoque deve ser maior que zero (recebida: " + novoProduto.getQtdEstoque() + ").");
 		}
 		
-		// validar preenchimento dos demais atributos herdeiros de Produto para que não sejam cadastrados nulos, exemplo: cadastrar
-		// um produto computador com os atributos processador, memória ram e sistemaoperacional nulos.
 		
 		this.produtoRepository.adicionarProduto(novoProduto);
 	}
@@ -52,20 +50,16 @@ public class ProdutoService {
 	}
 	
 	public List<Produto> listarProdutos() {
-		// poderiamos pensar em insewrir uma exceção para ver a quantidade de itens cadastrados, se não tiver nenhum, ele retorna um exception
 		return produtoRepository.listarProdutos();
 	}
 	
 	
 	public void desativarProduto(String idProduto) throws RegistroNaoEncontradoException, ProdutoIndisponivelException {
-		// primeiro buscar na base de dados
-		// dps verificar o status
-		// se o status tiver ativado, desativa
 		
 		Produto produto = buscarPorId(idProduto);
 		
 		if(produto.isDisponivel()) {
-			produto.desativar(); // mesmo se tiver em estoque, não permitir vender
+			produto.desativar();
 			produtoRepository.salvarAlteracoes();
 		}
 		
@@ -76,7 +70,7 @@ public class ProdutoService {
 	}
 	
 	public void removerProduto(String idProduto) {
-		produtoRepository.removerProduto(idProduto); // atenção aqui, tem que ver depois se é necessário inserir exception para validar antes se existe
+		produtoRepository.removerProduto(idProduto);
 	}
 	
 	

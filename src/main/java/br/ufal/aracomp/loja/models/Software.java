@@ -7,7 +7,7 @@ public class Software extends Produto {
 	public Software(String id, String nome, double preco, int qtdEstoque, String chaveAtivacao, String plataforma) {
 		super(id, nome, preco, qtdEstoque);
 		this.chaveAtivacao = chaveAtivacao;
-		this.plataforma = plataforma; // Excel, Windows, Adobe, PhotoShop, ThinkCell, Winrar
+		this.plataforma = plataforma;
 	}
 	
 	public String getChaveAtivacao() {

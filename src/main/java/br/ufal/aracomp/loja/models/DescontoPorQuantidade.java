@@ -21,7 +21,7 @@ public class DescontoPorQuantidade implements DescontoStrategy {
 	public double calcularDesconto(Pedido pedido) {
 		int totalItensPedido = 0;
 		
-		for(ItemPedido itemCarrinho: pedido.listarItens()) { // obter quantos itens no total o pedido teve, aqui necessitou que eu criasse o método getQuantide em ItemPedido
+		for(ItemPedido itemCarrinho: pedido.listarItens()) {
 			totalItensPedido += itemCarrinho.getQuantidade();
 		}
 		

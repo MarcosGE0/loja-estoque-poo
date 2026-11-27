@@ -11,7 +11,7 @@ public class ServicoTecnico implements Precificavel, Serializable {
 	private double precoHora;
 	private boolean ativo;
 	private double tempoHoraServico;
-	private String dataRealizacao; // mudar futuramente o tipo desse atributo kkk, fiquei com dúvida de como importa o tipo dele
+	private String dataRealizacao;
 	
 	public ServicoTecnico(String id, String nome, double precoHora, double tempoHoraServico, String dataRealizacao)
 			throws DadoEntradaException {
@@ -27,7 +27,7 @@ public class ServicoTecnico implements Precificavel, Serializable {
 		this.precoHora = precoHora;
 		this.tempoHoraServico = tempoHoraServico;
 		this.dataRealizacao = dataRealizacao;
-		this.ativo = true; // por padrão, ao instanciar um servico tecnico, ele hjá está ativo
+		this.ativo = true;
 	}
 	
 	public double getPreco() {
@@ -56,6 +56,6 @@ public class ServicoTecnico implements Precificavel, Serializable {
 		this.ativo = false;
 	}
 	
-	public void registrarVenda(int qtd) {} // pior que fique em dúvida aq kkk
+	public void registrarVenda(int qtd) {}
 	
 }

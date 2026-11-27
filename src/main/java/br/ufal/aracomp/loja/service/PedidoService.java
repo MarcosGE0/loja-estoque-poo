@@ -17,7 +17,6 @@ public class PedidoService {
     private ProdutoRepository produtos;
     private ServicoTecnicoService servicosTecnicos;
 
-    // Recebe os repositories e services necessários para aplicar as regras dos pedidos.
     public PedidoService(PedidoRepository pedidos, UsuarioRepository usuarios, ProdutoRepository produtos,  ServicoTecnicoService servicosTecnicos) {
         this.pedidos = pedidos;
         this.usuarios = usuarios;
@@ -26,28 +25,23 @@ public class PedidoService {
     }
 
     public void cadastrarPedido(Pedido novoPedido) throws DadoEntradaException, RegistroCadastradoException, RegistroNaoEncontradoException, UsuarioInativoException {
-        // Impede o cadastro de um pedido nulo.
         if (novoPedido == null) {
             throw new DadoEntradaException("Pedido não pode ser nulo.");
         }
 
-        // Valida o id do pedido para não ser nulo e nem uma string vazia.
         if (novoPedido.getIdPedido() == null || novoPedido.getIdPedido().equals("")) {
             throw new DadoEntradaException("ID do pedido não pode ser vazio.");
         }
 
-        // Impede pedidos com IDs já cadastrados.
         if (pedidos.buscarPedido(novoPedido.getIdPedido()) != null) {
             throw new RegistroCadastradoException("Já existe um pedido com o ID " + novoPedido.getIdPedido() + ".");
         }
 
-        // Exige que o pedido possua um cliente, não pode ser nulo.
         Cliente cliente = novoPedido.getCliente();
         if (cliente == null) {
             throw new DadoEntradaException("Pedido deve possuir um cliente.");
         }
 
-        // Procura o cliente cadastrado pelo ID.
         Usuario clienteCadastrado = null;
         for (Usuario usuario : usuarios.listarUsuarios()) {
             if (usuario.getId().equals(cliente.getId())) {
@@ -56,41 +50,33 @@ public class PedidoService {
             }
         }
 
-        // Confirma que o usuário encontrado é um cliente cadastrado.
         if (!(clienteCadastrado instanceof Cliente)) {
             throw new RegistroNaoEncontradoException("Cliente com ID " + cliente.getId() + " não cadastrado.");
         }
 
-        // Impede pedidos feitos por clientes inativos.
         if (!clienteCadastrado.isAtivo()) {
             throw new UsuarioInativoException("Cliente com ID " + cliente.getId() + " está inativo.");
         }
 
-        // Garante que pedidos novos comecem em aberto.
         if (novoPedido.getStatus() != StatusPedido.ABERTO) {
             throw new DadoEntradaException("Novo pedido deve iniciar com status ABERTO.");
         }
 
-        // Salva o pedido após todas as validações.
         pedidos.adicionarPedido(novoPedido);
     }
 
     public void removerPedido(String idPedido) throws DadoEntradaException, RegistroNaoEncontradoException {
-        // Impede a remoção sem um ID válido.
         if (idPedido == null || idPedido.equals("")) {
             throw new DadoEntradaException("ID do pedido não pode ser vazio.");
         }
 
-        // Impede remoção de pedido que não está cadastrado.
         if (pedidos.buscarPedido(idPedido) == null) {
             throw new RegistroNaoEncontradoException("Pedido com ID " + idPedido + " não encontrado.");
         }
 
-        // Remove o pedido encontrado pelo repositório.
         pedidos.removerPedido(idPedido);
     }
 
-    // Valida o pedido e adiciona um produto, informando a quantidade desejada.
     public void adicionarProdutoPedido(String idPedido, String idProduto, int quantidade)
             throws DadoEntradaException, RegistroNaoEncontradoException,
             ProdutoIndisponivelException, EstoqueInsuficienteException {
@@ -141,7 +127,6 @@ public class PedidoService {
         pedidos.salvarAlteracoes();
     }
 
-    // Valida o pedido e adiciona um serviço técnico ao pedido.
     public void adicionarServicoPedido(String idPedido, String idServico, int quantidade)
             throws DadoEntradaException, RegistroNaoEncontradoException,
             ServicoIndisponivelException {
@@ -180,7 +165,6 @@ public class PedidoService {
         pedidos.salvarAlteracoes();
     }
 
-    // Remove uma quantidade de um produto ou serviço pelo ID do item do pedido.
     public void removerItemPedido(String idPedido, String idItem, int quantidade)
             throws DadoEntradaException, RegistroNaoEncontradoException {
         Pedido pedido = buscarPedidoAberto(idPedido);
@@ -213,7 +197,6 @@ public class PedidoService {
         throw new RegistroNaoEncontradoException("Item com ID " + idItem + " não encontrado no pedido " + idPedido + ".");
     }
 
-    // Atualiza ou remove o item conforme a quantidade informada.
     private void removerQuantidadeItem(Pedido pedido, ItemPedido item, int quantidade)
             throws DadoEntradaException {
         if (quantidade > item.getQuantidade()) {
@@ -234,7 +217,6 @@ public class PedidoService {
         pedidos.salvarAlteracoes();
     }
 
-    // Busca um pedido e exige que ele esteja aberto.
     private Pedido buscarPedidoAberto(String idPedido) throws DadoEntradaException, RegistroNaoEncontradoException {
         Pedido pedido = buscarPorId(idPedido);
 
@@ -245,7 +227,6 @@ public class PedidoService {
         return pedido;
     }
 
-    // Busca um pedido pelo ID.
     public Pedido buscarPorId(String idPedido) throws DadoEntradaException, RegistroNaoEncontradoException {
         if (idPedido == null || idPedido.equals("")) {
             throw new DadoEntradaException("ID do pedido não pode ser vazio.");
@@ -259,12 +240,10 @@ public class PedidoService {
         return pedido;
     }
 
-    // Retorna a lista de pedidos cadastrados.
     public List<Pedido> listarPedidos() {
         return pedidos.listarPedidos();
     }
 
-    // Finaliza um pedido aberto que possua pelo menos um item.
     public void finalizarPedido(String idPedido)
             throws DadoEntradaException, RegistroNaoEncontradoException,
                    ProdutoIndisponivelException, EstoqueInsuficienteException {
@@ -274,7 +253,6 @@ public class PedidoService {
             throw new DadoEntradaException("Pedido deve possuir pelo menos um item.");
         }
 
-        // Valida todos os produtos antes de alterar o estoque.
         for (ItemPedido item : pedido.listarItens()) {
             if (item.getItem() instanceof Produto) {
                 Produto produto = buscarProdutoCadastrado(((Produto) item.getItem()).getId());
@@ -289,7 +267,6 @@ public class PedidoService {
             }
         }
 
-        // Baixa o estoque somente após todas as validações.
         for (ItemPedido item : pedido.listarItens()) {
             if (item.getItem() instanceof Produto) {
                 Produto produto = buscarProdutoCadastrado(((Produto) item.getItem()).getId());
@@ -312,7 +289,6 @@ public class PedidoService {
         throw new RegistroNaoEncontradoException("Produto com ID " + idProduto + " não cadastrado.");
     }
 
-    // Cancela um pedido aberto.
     public void cancelarPedido(String idPedido) throws DadoEntradaException, RegistroNaoEncontradoException {
         Pedido pedido = buscarPedidoAberto(idPedido);
         pedido.cancelarPedido();
