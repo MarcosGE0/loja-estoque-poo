@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import br.ufal.aracomp.loja.exception.DadoEntradaException;
 import br.ufal.aracomp.loja.exception.RegistroCadastradoException;
 import br.ufal.aracomp.loja.exception.RegistroNaoEncontradoException;
 import br.ufal.aracomp.loja.models.Administrador;
@@ -93,6 +94,22 @@ public class UsuarioServiceTest {
         assertThrows(RegistroCadastradoException.class,
                 () -> service.alterarDadosUsuario("u2", "ana@email.com", "Rua B"));
         assertEquals("bia@email.com", service.buscarPorId("u2").getEmail());
+    }
+
+    @Test
+    public void rejeitaEnderecoVazioAoAlterarSemAtualizarParcialmente() throws Exception {
+        service.cadastrarUsuario(pessoa("u1", "ana@email.com", "CPF 123"));
+
+        assertThrows(DadoEntradaException.class,
+                () -> service.alterarDadosUsuario("u1", "ana.nova@email.com", ""));
+        assertThrows(DadoEntradaException.class,
+                () -> service.alterarDadosUsuario("u1", "ana.nova@email.com", "   "));
+        assertThrows(DadoEntradaException.class,
+                () -> service.alterarDadosUsuario("u1", "ana.nova@email.com", null));
+
+        PessoaFisica usuario = (PessoaFisica) service.buscarPorId("u1");
+        assertEquals("ana@email.com", usuario.getEmail());
+        assertEquals("Rua A", usuario.getEndereco());
     }
 
     @Test

@@ -71,9 +71,10 @@ public class UsuarioService {
 			}
 		}
 
-		usuario.alterarEmail(email);
 		if (usuario instanceof Cliente) {
-			((Cliente) usuario).alterarEndereco(endereco);
+			((Cliente) usuario).alterarDadosContato(email, endereco);
+		} else {
+			usuario.alterarEmail(email);
 		}
 		usuarioRepository.salvarAlteracoes();
 	}
