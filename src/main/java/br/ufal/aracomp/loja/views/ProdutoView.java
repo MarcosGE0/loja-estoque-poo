@@ -251,8 +251,12 @@ public class ProdutoView {
 		String id = scanner.nextLine();
 		
 		
-		produtoController.removerProduto(id);
-		System.out.println("Produto removido com êxito!");
+		try {
+			produtoController.removerProduto(id);
+			System.out.println("Produto removido com êxito!");
+		} catch (DominioException e) {
+			System.out.println("Erro: " + e.getMessage());
+		}
 	}
 	
 	private void telaAdicionarEstoque() {

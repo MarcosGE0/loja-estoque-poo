@@ -17,7 +17,7 @@ public class ProdutoService {
 		this.produtoRepository = produtoRepository;
 	}
 	
-	public void cadastrarProduto(Produto novoProduto) throws RegistroCadastradoException, DadoEntradaException {
+	public void cadastrarProduto(Produto novoProduto) throws RegistroCadastradoException, DadoEntradaException, PersistenciaException {
 		
 		for(Produto produto_cadastrado: produtoRepository.listarProdutos()) {
 			if(produto_cadastrado.getId().equals(novoProduto.getId())) {
@@ -54,7 +54,7 @@ public class ProdutoService {
 	}
 	
 	
-	public void desativarProduto(String idProduto) throws RegistroNaoEncontradoException, ProdutoIndisponivelException {
+	public void desativarProduto(String idProduto) throws RegistroNaoEncontradoException, ProdutoIndisponivelException, PersistenciaException {
 		
 		Produto produto = buscarPorId(idProduto);
 		
@@ -69,12 +69,12 @@ public class ProdutoService {
 		
 	}
 	
-	public void removerProduto(String idProduto) {
+	public void removerProduto(String idProduto) throws PersistenciaException {
 		produtoRepository.removerProduto(idProduto);
 	}
 	
 	
-	public void adicionarEstoque(String idProduto, int quantidade) throws RegistroNaoEncontradoException, DadoEntradaException {
+	public void adicionarEstoque(String idProduto, int quantidade) throws RegistroNaoEncontradoException, DadoEntradaException, PersistenciaException {
 		if(quantidade <= 0) {
 			throw new DadoEntradaException("Quantidade de estoque a adicionar deve ser maior que zero (recebida: " + quantidade + ").");
 		}

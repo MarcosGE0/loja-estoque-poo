@@ -15,7 +15,7 @@ public class PedidoController {
     }
 
     public void cadastrarPedido(Pedido novoPedido)
-            throws DadoEntradaException, RegistroCadastradoException, RegistroNaoEncontradoException, UsuarioInativoException {
+            throws DadoEntradaException, RegistroCadastradoException, RegistroNaoEncontradoException, UsuarioInativoException, PersistenciaException {
         pedidoService.cadastrarPedido(novoPedido);
     }
 
@@ -29,37 +29,37 @@ public class PedidoController {
     }
 
     public void removerPedido(String idPedido)
-            throws DadoEntradaException, RegistroNaoEncontradoException {
+            throws DadoEntradaException, RegistroNaoEncontradoException, PersistenciaException {
         pedidoService.removerPedido(idPedido);
     }
 
     public void adicionarProdutoPedido(String idPedido, String idProduto, int quantidade)
-            throws DadoEntradaException, RegistroNaoEncontradoException, ProdutoIndisponivelException, EstoqueInsuficienteException {
+            throws DadoEntradaException, RegistroNaoEncontradoException, ProdutoIndisponivelException, EstoqueInsuficienteException, PersistenciaException {
         pedidoService.adicionarProdutoPedido(idPedido, idProduto, quantidade);
     }
 
     public void adicionarServicoPedido(String idPedido, String idServico, int quantidade)
-            throws DadoEntradaException, RegistroNaoEncontradoException, ServicoIndisponivelException {
+            throws DadoEntradaException, RegistroNaoEncontradoException, ServicoIndisponivelException, PersistenciaException {
         pedidoService.adicionarServicoPedido(idPedido, idServico, quantidade);
     }
 
     public void removerItemPedido(String idPedido, String idItem, int quantidade)
-            throws DadoEntradaException, RegistroNaoEncontradoException {
+            throws DadoEntradaException, RegistroNaoEncontradoException, PersistenciaException {
         pedidoService.removerItemPedido(idPedido, idItem, quantidade);
     }
 
     public void aplicarDesconto(String idPedido, DescontoStrategy desconto)
-            throws DadoEntradaException, RegistroNaoEncontradoException {
+            throws DadoEntradaException, RegistroNaoEncontradoException, PersistenciaException {
         pedidoService.aplicarDesconto(idPedido, desconto);
     }
 
     public void finalizarPedido(String idPedido)
-            throws DadoEntradaException, RegistroNaoEncontradoException, ProdutoIndisponivelException, EstoqueInsuficienteException {
+            throws DadoEntradaException, RegistroNaoEncontradoException, ProdutoIndisponivelException, EstoqueInsuficienteException, PersistenciaException {
         pedidoService.finalizarPedido(idPedido);
     }
 
     public void cancelarPedido(String idPedido)
-            throws DadoEntradaException, RegistroNaoEncontradoException {
+            throws DadoEntradaException, RegistroNaoEncontradoException, PersistenciaException {
         pedidoService.cancelarPedido(idPedido);
     }
 }

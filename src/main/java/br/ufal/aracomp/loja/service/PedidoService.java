@@ -24,7 +24,7 @@ public class PedidoService {
         this.servicosTecnicos = servicosTecnicos;
     }
 
-    public void cadastrarPedido(Pedido novoPedido) throws DadoEntradaException, RegistroCadastradoException, RegistroNaoEncontradoException, UsuarioInativoException {
+    public void cadastrarPedido(Pedido novoPedido) throws DadoEntradaException, RegistroCadastradoException, RegistroNaoEncontradoException, UsuarioInativoException, PersistenciaException {
         if (novoPedido == null) {
             throw new DadoEntradaException("Pedido não pode ser nulo.");
         }
@@ -65,7 +65,7 @@ public class PedidoService {
         pedidos.adicionarPedido(novoPedido);
     }
 
-    public void removerPedido(String idPedido) throws DadoEntradaException, RegistroNaoEncontradoException {
+    public void removerPedido(String idPedido) throws DadoEntradaException, RegistroNaoEncontradoException, PersistenciaException {
         if (idPedido == null || idPedido.equals("")) {
             throw new DadoEntradaException("ID do pedido não pode ser vazio.");
         }
@@ -79,7 +79,7 @@ public class PedidoService {
 
     public void adicionarProdutoPedido(String idPedido, String idProduto, int quantidade)
             throws DadoEntradaException, RegistroNaoEncontradoException,
-            ProdutoIndisponivelException, EstoqueInsuficienteException {
+            ProdutoIndisponivelException, EstoqueInsuficienteException, PersistenciaException {
         Pedido pedido = buscarPedidoAberto(idPedido);
 
         if (quantidade <= 0) {
@@ -129,24 +129,14 @@ public class PedidoService {
 
     public void adicionarServicoPedido(String idPedido, String idServico, int quantidade)
             throws DadoEntradaException, RegistroNaoEncontradoException,
-            ServicoIndisponivelException {
+            ServicoIndisponivelException, PersistenciaException {
         Pedido pedido = buscarPedidoAberto(idPedido);
 
         if (quantidade <= 0) {
             throw new DadoEntradaException("Quantidade deve ser maior que zero (recebida: " + quantidade + ").");
         }
 
-        ServicoTecnico servico = null;
-        for (ServicoTecnico servicoCadastrado : servicosTecnicos.getServicoTecnicoRepository().listarServicoTecnico()) {
-            if (servicoCadastrado.getId().equals(idServico)) {
-                servico = servicoCadastrado;
-                break;
-            }
-        }
-
-        if (servico == null) {
-            throw new RegistroNaoEncontradoException("Serviço técnico com ID " + idServico + " não encontrado.");
-        }
+        ServicoTecnico servico = servicosTecnicos.buscarPorIdServicoTecnico(idServico);
 
         if (!servico.isDisponivel()) {
             throw new ServicoIndisponivelException("Serviço técnico com ID " + idServico + " está indisponível.");
@@ -166,7 +156,7 @@ public class PedidoService {
     }
 
     public void removerItemPedido(String idPedido, String idItem, int quantidade)
-            throws DadoEntradaException, RegistroNaoEncontradoException {
+            throws DadoEntradaException, RegistroNaoEncontradoException, PersistenciaException {
         Pedido pedido = buscarPedidoAberto(idPedido);
 
         if (idItem == null || idItem.equals("")) {
@@ -211,7 +201,7 @@ public class PedidoService {
     }
 
     public void aplicarDesconto(String idPedido, DescontoStrategy desconto)
-            throws DadoEntradaException, RegistroNaoEncontradoException {
+            throws DadoEntradaException, RegistroNaoEncontradoException, PersistenciaException {
         Pedido pedido = buscarPedidoAberto(idPedido);
         pedido.aplicarDesconto(desconto);
         pedidos.salvarAlteracoes();
@@ -246,7 +236,7 @@ public class PedidoService {
 
     public void finalizarPedido(String idPedido)
             throws DadoEntradaException, RegistroNaoEncontradoException,
-                   ProdutoIndisponivelException, EstoqueInsuficienteException {
+                   ProdutoIndisponivelException, EstoqueInsuficienteException, PersistenciaException {
         Pedido pedido = buscarPedidoAberto(idPedido);
 
         if (pedido.listarItens().size() == 0) {
@@ -289,7 +279,7 @@ public class PedidoService {
         throw new RegistroNaoEncontradoException("Produto com ID " + idProduto + " não cadastrado.");
     }
 
-    public void cancelarPedido(String idPedido) throws DadoEntradaException, RegistroNaoEncontradoException {
+    public void cancelarPedido(String idPedido) throws DadoEntradaException, RegistroNaoEncontradoException, PersistenciaException {
         Pedido pedido = buscarPedidoAberto(idPedido);
         pedido.cancelarPedido();
         pedidos.salvarAlteracoes();

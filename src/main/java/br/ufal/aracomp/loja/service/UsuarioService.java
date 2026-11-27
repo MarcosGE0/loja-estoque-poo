@@ -16,7 +16,7 @@ public class UsuarioService {
 		this.usuarioRepository = usuarioRepository;
 	}
 	
-	public void cadastrarUsuario(Usuario novoUsuario) throws RegistroCadastradoException {
+	public void cadastrarUsuario(Usuario novoUsuario) throws RegistroCadastradoException, PersistenciaException {
 		
 		for(Usuario usuario_cadastrado: usuarioRepository.listarUsuarios()) {
 			if(usuario_cadastrado.getEmail().equals(novoUsuario.getEmail())) {
@@ -62,7 +62,7 @@ public class UsuarioService {
 	}
 
 	public void desativarUsuario(String idUsuario)
-			throws DadoEntradaException, RegistroNaoEncontradoException, UsuarioInativoException {
+			throws DadoEntradaException, RegistroNaoEncontradoException, UsuarioInativoException, PersistenciaException {
 		if (idUsuario == null || idUsuario.equals("")) {
 			throw new DadoEntradaException("ID do usuário não pode ser vazio.");
 		}
@@ -78,7 +78,7 @@ public class UsuarioService {
 	}
 
 	public void removerUsuario(String idUsuario)
-			throws DadoEntradaException, RegistroNaoEncontradoException {
+			throws DadoEntradaException, RegistroNaoEncontradoException, PersistenciaException {
 		if (idUsuario == null || idUsuario.equals("")) {
 			throw new DadoEntradaException("ID do usuário não pode ser vazio.");
 		}

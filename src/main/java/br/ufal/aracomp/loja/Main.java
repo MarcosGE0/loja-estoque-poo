@@ -4,6 +4,7 @@ import br.ufal.aracomp.loja.controller.PedidoController;
 import br.ufal.aracomp.loja.controller.ProdutoController;
 import br.ufal.aracomp.loja.controller.ServicoTecnicoController;
 import br.ufal.aracomp.loja.controller.UsuarioController;
+import br.ufal.aracomp.loja.exception.PersistenciaException;
 import br.ufal.aracomp.loja.repository.PedidoRepository;
 import br.ufal.aracomp.loja.repository.ProdutoRepository;
 import br.ufal.aracomp.loja.repository.ServicoTecnicoRepository;
@@ -15,7 +16,7 @@ import br.ufal.aracomp.loja.service.UsuarioService;
 import br.ufal.aracomp.loja.views.MainView;
 
 public class Main {
-	public static void main(String[] args) {
+	public static void main(String[] args) throws PersistenciaException {
 		UsuarioRepository usuarioRepository = new UsuarioRepository();
 		ProdutoRepository produtoRepository = new ProdutoRepository();
 		ServicoTecnicoRepository servicoTecnicoRepository = new ServicoTecnicoRepository();

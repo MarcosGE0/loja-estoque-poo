@@ -23,7 +23,7 @@ public class ProdutoServiceTest {
     private ProdutoService service;
 
     @BeforeEach
-    public void configurar() {
+    public void configurar() throws Exception {
         repository = new ProdutoRepository(diretorioTemporario.resolve("produtos.dat").toString());
         service = new ProdutoService(repository);
     }

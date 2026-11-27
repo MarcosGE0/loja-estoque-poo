@@ -20,7 +20,7 @@ public class ServicoTecnicoServiceTest {
     private ServicoTecnicoService service;
 
     @BeforeEach
-    public void configurar() {
+    public void configurar() throws Exception {
         repository = new ServicoTecnicoRepository(
                 diretorioTemporario.resolve("servicos.dat").toString());
         service = new ServicoTecnicoService(repository);

@@ -4,6 +4,7 @@ import br.ufal.aracomp.loja.models.ServicoTecnico;
 import br.ufal.aracomp.loja.exception.RegistroCadastradoException;
 import br.ufal.aracomp.loja.exception.RegistroNaoEncontradoException;
 import br.ufal.aracomp.loja.exception.DadoEntradaException;
+import br.ufal.aracomp.loja.exception.PersistenciaException;
 import br.ufal.aracomp.loja.exception.ServicoIndisponivelException;
 import br.ufal.aracomp.loja.service.ServicoTecnicoService;
 import java.util.List;
@@ -15,16 +16,16 @@ public class ServicoTecnicoController {
         this.servicoTecnicoService = servicoTecnicoService;
     }
 
-    public void cadastrarServicoTecnico (ServicoTecnico servico) throws RegistroCadastradoException {
+    public void cadastrarServicoTecnico (ServicoTecnico servico) throws RegistroCadastradoException, PersistenciaException {
         servicoTecnicoService.cadastrarServicoTecnico(servico);
     }
 
-    public void removerServicoTecnico(String idServicoTecnico) throws RegistroNaoEncontradoException {
+    public void removerServicoTecnico(String idServicoTecnico) throws RegistroNaoEncontradoException, PersistenciaException {
         servicoTecnicoService.removerServicoTecnico(idServicoTecnico);
     }
 
     public void desativarServicoTecnico(String idServicoTecnico)
-            throws DadoEntradaException, RegistroNaoEncontradoException, ServicoIndisponivelException {
+            throws DadoEntradaException, RegistroNaoEncontradoException, ServicoIndisponivelException, PersistenciaException {
         servicoTecnicoService.desativarServicoTecnico(idServicoTecnico);
     }
 

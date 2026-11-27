@@ -19,18 +19,18 @@ public class UsuarioController {
 	}
 	
 	public void cadastrarPessoaFisica(String id, String nome, String email, String endereco, String cpf)
-			throws RegistroCadastradoException, DadoEntradaException {
+			throws RegistroCadastradoException, DadoEntradaException, PersistenciaException {
 		PessoaFisica nova_pf = new PessoaFisica(id, nome, email, endereco, cpf);
 		this.usuarioservice.cadastrarUsuario(nova_pf);
 	}
 	
 	public void cadastrarPessoaJuridica(String id, String nome, String email, String endereco, String cnpj)
-			throws RegistroCadastradoException, DadoEntradaException {
+			throws RegistroCadastradoException, DadoEntradaException, PersistenciaException {
 		PessoaJuridica nova_pj = new PessoaJuridica(id, nome, email, endereco, cnpj);
 		this.usuarioservice.cadastrarUsuario(nova_pj);
 	}
 	
-	public void cadastrarAdministrador(String id, String nome, String email, String setor) throws RegistroCadastradoException {
+	public void cadastrarAdministrador(String id, String nome, String email, String setor) throws RegistroCadastradoException, PersistenciaException {
 		Administrador adm = new Administrador(id, nome, email, setor);
 		this.usuarioservice.cadastrarUsuario(adm);
 	}
@@ -44,12 +44,12 @@ public class UsuarioController {
 	}
 
 	public void desativarUsuario(String idUsuario)
-			throws DadoEntradaException, RegistroNaoEncontradoException, UsuarioInativoException {
+			throws DadoEntradaException, RegistroNaoEncontradoException, UsuarioInativoException, PersistenciaException {
 		this.usuarioservice.desativarUsuario(idUsuario);
 	}
 
 	public void removerUsuario(String idUsuario)
-			throws DadoEntradaException, RegistroNaoEncontradoException {
+			throws DadoEntradaException, RegistroNaoEncontradoException, PersistenciaException {
 		this.usuarioservice.removerUsuario(idUsuario);
 	}
 }

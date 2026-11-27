@@ -22,7 +22,7 @@ public class UsuarioServiceTest {
     private UsuarioService service;
 
     @BeforeEach
-    public void configurar() {
+    public void configurar() throws Exception {
         repository = new UsuarioRepository(diretorioTemporario.resolve("usuarios.dat").toString());
         service = new UsuarioService(repository);
     }

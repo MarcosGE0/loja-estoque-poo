@@ -1,4 +1,6 @@
 package br.ufal.aracomp.loja.repository;
+
+import br.ufal.aracomp.loja.exception.PersistenciaException;
 import java.util.ArrayList;
 import java.util.List;
 import br.ufal.aracomp.loja.models.Produto;
@@ -6,21 +8,21 @@ import br.ufal.aracomp.loja.models.Produto;
 public class ProdutoRepository extends ArquivoRepository<Produto> {
 	private final List<Produto> produtos;
 
-	public ProdutoRepository() {
+	public ProdutoRepository() throws PersistenciaException {
 		this("dados/produtos.dat");
 	}
 
-	public ProdutoRepository(String arquivo) {
+	public ProdutoRepository(String arquivo) throws PersistenciaException {
 		super(arquivo);
 		this.produtos = carregar();
 	}
 
-	public void adicionarProduto(Produto novoProduto) {
+	public void adicionarProduto(Produto novoProduto) throws PersistenciaException {
 		this.produtos.add(novoProduto);
 		salvar(produtos);
 	}
 
-	public void salvarAlteracoes() {
+	public void salvarAlteracoes() throws PersistenciaException {
 		salvar(produtos);
 	}
 
@@ -28,7 +30,7 @@ public class ProdutoRepository extends ArquivoRepository<Produto> {
 		return new ArrayList<>(this.produtos);
 	}
 
-	public void removerProduto(String idProduto) {
+	public void removerProduto(String idProduto) throws PersistenciaException {
 		int posicao_produto = -1;
 		int contador = 0;
 
