@@ -43,6 +43,13 @@ public abstract class Usuario implements Serializable {
 		return this.id;
 	}
 
+	public void alterarEmail(String email) throws DadoEntradaException {
+		if (email == null || email.isBlank()) {
+			throw new DadoEntradaException("E-mail do usuário não pode ser vazio.");
+		}
+		this.email = email;
+	}
+
 	public void desativar() {
 		this.ativo = false;
 	}

@@ -3,9 +3,11 @@ package br.ufal.aracomp.loja.service;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import br.ufal.aracomp.loja.exception.RegistroCadastradoException;
 import br.ufal.aracomp.loja.exception.RegistroNaoEncontradoException;
+import br.ufal.aracomp.loja.models.Administrador;
 import br.ufal.aracomp.loja.models.PessoaFisica;
 import br.ufal.aracomp.loja.models.PessoaJuridica;
 import br.ufal.aracomp.loja.repository.UsuarioRepository;
@@ -64,6 +66,42 @@ public class UsuarioServiceTest {
         UsuarioRepository repositoryReaberto =
                 new UsuarioRepository(diretorioTemporario.resolve("usuarios.dat").toString());
         assertFalse(repositoryReaberto.listarUsuarios().get(0).isAtivo());
+    }
+
+    @Test
+    public void alteraDadosDoUsuarioEPersisteAlteracao() throws Exception {
+        service.cadastrarUsuario(pessoa("u1", "ana@email.com", "CPF 123"));
+
+        service.alterarDadosUsuario("u1", "ana.nova@email.com", "Rua B");
+
+        PessoaFisica usuarioAtualizado = (PessoaFisica) service.buscarPorId("u1");
+        assertEquals("ana.nova@email.com", usuarioAtualizado.getEmail());
+        assertEquals("Rua B", usuarioAtualizado.getEndereco());
+
+        UsuarioRepository repositoryReaberto =
+                new UsuarioRepository(diretorioTemporario.resolve("usuarios.dat").toString());
+        PessoaFisica usuarioPersistido = (PessoaFisica) repositoryReaberto.listarUsuarios().get(0);
+        assertEquals("ana.nova@email.com", usuarioPersistido.getEmail());
+        assertEquals("Rua B", usuarioPersistido.getEndereco());
+    }
+
+    @Test
+    public void rejeitaEmailDuplicadoAoAlterarUsuario() throws Exception {
+        service.cadastrarUsuario(pessoa("u1", "ana@email.com", "CPF 123"));
+        service.cadastrarUsuario(pessoa("u2", "bia@email.com", "CPF 456"));
+
+        assertThrows(RegistroCadastradoException.class,
+                () -> service.alterarDadosUsuario("u2", "ana@email.com", "Rua B"));
+        assertEquals("bia@email.com", service.buscarPorId("u2").getEmail());
+    }
+
+    @Test
+    public void exibeEnderecoDeClienteESetorDeAdministrador() throws Exception {
+        PessoaFisica cliente = pessoa("u1", "ana@email.com", "CPF 123");
+        Administrador administrador = new Administrador("a1", "Admin", "admin@email.com", "TI");
+
+        assertTrue(cliente.toString().contains("Endereço: Rua A"));
+        assertTrue(administrador.toString().contains("Setor: TI"));
     }
 
     @Test

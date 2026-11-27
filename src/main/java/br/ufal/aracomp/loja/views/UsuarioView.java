@@ -28,6 +28,7 @@ public class UsuarioView {
 			System.out.println("5 - Buscar Por ID");
 			System.out.println("6 - Desativar Usuário");
 			System.out.println("7 - Remover Usuário");
+			System.out.println("8 - Alterar dados de usuário");
 			System.out.println("0 - Voltar ao Menu Principal");
 			
 			System.out.println("Selecione uma opção: ");
@@ -69,6 +70,9 @@ public class UsuarioView {
 
 			else if(opcao == 7) {
 				telaRemoverUsuario();
+			}
+			else if(opcao == 8) {
+				telaAlterarUsuario();
 			}
 		}
 	}
@@ -194,6 +198,28 @@ public class UsuarioView {
 		try {
 			usuarioController.removerUsuario(id);
 			System.out.println("Usuário removido com sucesso!");
+		} catch (DominioException e) {
+			System.out.println("Erro: " + e.getMessage());
+		}
+	}
+
+	private void telaAlterarUsuario() {
+		System.out.println("\n--- Alterar Dados de Usuário ---");
+		System.out.print("ID do usuário: ");
+		String id = scanner.nextLine();
+
+		try {
+			Usuario usuario = usuarioController.buscarPorId(id);
+			System.out.print("Novo e-mail: ");
+			String email = scanner.nextLine();
+			String endereco = null;
+			if (usuario instanceof Cliente) {
+				System.out.print("Novo endereço: ");
+				endereco = scanner.nextLine();
+			}
+
+			usuarioController.alterarDadosUsuario(id, email, endereco);
+			System.out.println("Dados do usuário atualizados com sucesso!");
 		} catch (DominioException e) {
 			System.out.println("Erro: " + e.getMessage());
 		}

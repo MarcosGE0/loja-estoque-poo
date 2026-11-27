@@ -18,6 +18,8 @@ public class Software extends Produto {
 	
 	@Override
 	public String toString() {
-		return String.format("%s | %s | R$ %s | Qtd: %s | %s | %s", this.getId(), this.getNome(), this.getPreco(), this.getQtdEstoque(), this.isDisponivel(), this.plataforma);
+		return String.format("%s | %s | R$ %s | Qtd: %s | %s | Plataforma: %s | Chave: %s",
+				this.getId(), this.getNome(), this.getPreco(), this.getQtdEstoque(), this.isDisponivel(),
+				this.plataforma, this.getChaveAtivacao());
 	}
 }

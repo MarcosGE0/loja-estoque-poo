@@ -36,4 +36,9 @@ public class ServicoTecnicoController {
     public List<ServicoTecnico> listarServicoTecnico() {
         return servicoTecnicoService.listarServicoTecnico();
     }
+
+    public void alterarPrecoHora(String idServicoTecnico, double novoPrecoHora)
+            throws DadoEntradaException, RegistroNaoEncontradoException, PersistenciaException {
+        servicoTecnicoService.alterarPrecoHora(idServicoTecnico, novoPrecoHora);
+    }
 }

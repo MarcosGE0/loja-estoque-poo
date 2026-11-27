@@ -1,6 +1,7 @@
 package br.ufal.aracomp.loja.service;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import br.ufal.aracomp.loja.exception.DadoEntradaException;
@@ -40,5 +41,18 @@ public class ServicoTecnicoServiceTest {
     @Test
     public void rejeitaIdVazioAoDesativarServico() {
         assertThrows(DadoEntradaException.class, () -> service.desativarServicoTecnico(" "));
+    }
+
+    @Test
+    public void alteraPrecoHoraERejeitaValorInvalido() throws Exception {
+        service.cadastrarServicoTecnico(new ServicoTecnico("s1", "Manutenção", 50.0, 2, "2026-11-26"));
+
+        service.alterarPrecoHora("s1", 75.0);
+
+        assertEquals(150.0, service.buscarPorIdServicoTecnico("s1").getPreco());
+        ServicoTecnicoRepository repositoryReaberto =
+                new ServicoTecnicoRepository(diretorioTemporario.resolve("servicos.dat").toString());
+        assertEquals(150.0, repositoryReaberto.listarServicoTecnico().get(0).getPreco());
+        assertThrows(DadoEntradaException.class, () -> service.alterarPrecoHora("s1", -1.0));
     }
 }

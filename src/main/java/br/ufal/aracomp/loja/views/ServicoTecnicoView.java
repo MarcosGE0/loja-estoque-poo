@@ -27,6 +27,7 @@ public class ServicoTecnicoView {
             System.out.println("3 - Buscar por ID");
             System.out.println("4 - Remover serviço técnico");
             System.out.println("5 - Desativar serviço técnico");
+            System.out.println("6 - Alterar preço por hora");
             System.out.println("0 - Voltar ao Menu Principal");
             System.out.print("Selecione uma opção: ");
 
@@ -47,6 +48,8 @@ public class ServicoTecnicoView {
                 telaRemoverServicoTecnico();
             } else if (opcao == 5) {
                 telaDesativarServicoTecnico();
+            } else if (opcao == 6) {
+                telaAlterarPrecoHora();
             } else if (opcao != 0) {
                 System.out.println("Opção inválida!");
             }
@@ -135,6 +138,23 @@ public class ServicoTecnicoView {
         try {
             servicoTecnicoController.desativarServicoTecnico(id);
             System.out.println("Serviço técnico desativado com sucesso!");
+        } catch (DominioException e) {
+            System.out.println("Erro: " + e.getMessage());
+        }
+    }
+
+    private void telaAlterarPrecoHora() {
+        System.out.println("\n--- Alterar Preço por Hora do Serviço ---");
+        System.out.print("ID: ");
+        String id = scanner.nextLine();
+        System.out.print("Novo preço por hora: ");
+
+        try {
+            double novoPrecoHora = Double.parseDouble(scanner.nextLine());
+            servicoTecnicoController.alterarPrecoHora(id, novoPrecoHora);
+            System.out.println("Preço por hora atualizado com sucesso!");
+        } catch (NumberFormatException e) {
+            System.out.println("O preço deve ser um número válido.");
         } catch (DominioException e) {
             System.out.println("Erro: " + e.getMessage());
         }

@@ -37,10 +37,6 @@ public class DescontoPorQuantidade implements DescontoStrategy {
 		return this.quantidadeMinima;
 	}
 
-	public double getPercentual() {
-		return this.percentual;
-	}
-
 	@Override
 	public String getNome() {
 		return "Desconto por quantidade";

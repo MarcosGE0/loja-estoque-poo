@@ -19,13 +19,9 @@ public class PessoaJuridica extends Cliente {
 	}
 	
 	@Override
-	public String getDocumentacao() {
-		return String.format("Nome: %s \nCNPJ: %s", this.getNome(), this.cnpj);
-	}
-	
-	@Override
 	public String toString() {
-		return String.format("%s | %s | %s | CNPJ: %s | %s", this.getId(), this.getNome(), this.getEmail(), this.cnpj, this.isAtivo());
+		return String.format("%s | %s | %s | CNPJ: %s | Endereço: %s | %s",
+				this.getId(), this.getNome(), this.getEmail(), this.cnpj, this.getEndereco(), this.isAtivo());
 	}
 
 }

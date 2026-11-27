@@ -19,10 +19,6 @@ public class DescontoPromocional implements DescontoStrategy {
 		return desconto;
 	}
 
-	public double getPercentual() {
-		return this.percentual;
-	}
-
 	@Override
 	public String getNome() {
 		return "Desconto promocional";

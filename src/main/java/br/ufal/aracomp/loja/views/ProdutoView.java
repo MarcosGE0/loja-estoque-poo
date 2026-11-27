@@ -28,6 +28,7 @@ public class ProdutoView {
 			System.out.println("7 - Desativar Produto por ID");
 			System.out.println("8 - Remover Produto da B.D por ID");
 			System.out.println("9 - Adicionar Estoque do Produto por ID");
+			System.out.println("10 - Alterar Preço do Produto");
 			System.out.println("0 - Voltar ao Menu Principal");
 			
 			System.out.println("Selecione uma opção: ");
@@ -78,6 +79,10 @@ public class ProdutoView {
 					
 				case 9:
 					telaAdicionarEstoque();
+					break;
+
+				case 10:
+					telaAlterarPreco();
 					break;
 			}
 		}
@@ -280,6 +285,23 @@ public class ProdutoView {
 			System.out.println("Erro: " + e.getMessage());
 		}
 		
+	}
+
+	private void telaAlterarPreco() {
+		System.out.println("\n--- Alterar Preço do Produto ---");
+		System.out.print("ID do Produto: ");
+		String id = scanner.nextLine();
+		System.out.print("Novo preço R$: ");
+
+		try {
+			double novoPreco = Double.parseDouble(scanner.nextLine());
+			produtoController.alterarPreco(id, novoPreco);
+			System.out.println("Preço do produto atualizado com sucesso!");
+		} catch (NumberFormatException e) {
+			System.out.println("O preço deve ser um número válido.");
+		} catch (DominioException e) {
+			System.out.println("Erro: " + e.getMessage());
+		}
 	}
 	
 }

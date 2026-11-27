@@ -1,6 +1,7 @@
 package br.ufal.aracomp.loja.service;
 import br.ufal.aracomp.loja.exception.RegistroCadastradoException;
 import br.ufal.aracomp.loja.exception.RegistroNaoEncontradoException;
+import br.ufal.aracomp.loja.models.Cliente;
 import br.ufal.aracomp.loja.models.PessoaFisica;
 import br.ufal.aracomp.loja.models.PessoaJuridica;
 import br.ufal.aracomp.loja.models.Usuario;
@@ -59,6 +60,22 @@ public class UsuarioService {
 	
 	public List<Usuario> listarUsuarios() {
 		return usuarioRepository.listarUsuarios();
+	}
+
+	public void alterarDadosUsuario(String idUsuario, String email, String endereco)
+			throws DadoEntradaException, RegistroCadastradoException, RegistroNaoEncontradoException, PersistenciaException {
+		Usuario usuario = buscarPorId(idUsuario);
+		for (Usuario cadastrado : usuarioRepository.listarUsuarios()) {
+			if (!cadastrado.getId().equals(idUsuario) && cadastrado.getEmail().equals(email)) {
+				throw new RegistroCadastradoException("E-mail já utilizado: " + email + ".");
+			}
+		}
+
+		usuario.alterarEmail(email);
+		if (usuario instanceof Cliente) {
+			((Cliente) usuario).alterarEndereco(endereco);
+		}
+		usuarioRepository.salvarAlteracoes();
 	}
 
 	public void desativarUsuario(String idUsuario)

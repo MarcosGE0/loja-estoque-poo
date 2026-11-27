@@ -13,6 +13,9 @@ public abstract class Cliente extends Usuario {
 	public String getEndereco() {
 		return this.endereco;
 	}
+
+	public void alterarEndereco(String endereco) {
+		this.endereco = endereco;
+	}
 	
-	public abstract String getDocumentacao();
 }

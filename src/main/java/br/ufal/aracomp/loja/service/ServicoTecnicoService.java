@@ -59,4 +59,11 @@ public class ServicoTecnicoService {
     public List<ServicoTecnico> listarServicoTecnico() {
         return servicoTecnicoRepository.listarServicoTecnico();
     }
+
+    public void alterarPrecoHora(String idServicoTecnico, double novoPrecoHora)
+            throws DadoEntradaException, RegistroNaoEncontradoException, PersistenciaException {
+        ServicoTecnico servico = buscarPorIdServicoTecnico(idServicoTecnico);
+        servico.alterarPrecoHora(novoPrecoHora);
+        servicoTecnicoRepository.salvarAlteracoes();
+    }
 }

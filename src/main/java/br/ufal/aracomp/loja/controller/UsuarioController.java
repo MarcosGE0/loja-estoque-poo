@@ -43,6 +43,11 @@ public class UsuarioController {
 		return this.usuarioservice.listarUsuarios();
 	}
 
+	public void alterarDadosUsuario(String idUsuario, String email, String endereco)
+			throws DadoEntradaException, RegistroCadastradoException, RegistroNaoEncontradoException, PersistenciaException {
+		this.usuarioservice.alterarDadosUsuario(idUsuario, email, endereco);
+	}
+
 	public void desativarUsuario(String idUsuario)
 			throws DadoEntradaException, RegistroNaoEncontradoException, UsuarioInativoException, PersistenciaException {
 		this.usuarioservice.desativarUsuario(idUsuario);

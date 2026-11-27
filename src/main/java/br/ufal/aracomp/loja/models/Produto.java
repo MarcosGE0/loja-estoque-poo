@@ -36,6 +36,13 @@ public abstract class Produto implements Precificavel, Serializable {
 	public double getPreco() {
 		return this.preco;
 	}
+
+	public void alterarPreco(double preco) throws DadoEntradaException {
+		if (!Double.isFinite(preco) || preco <= 0) {
+			throw new DadoEntradaException("Preço do produto deve ser maior que zero.");
+		}
+		this.preco = preco;
+	}
 	
 	public String getNome() {
 		return this.nome;

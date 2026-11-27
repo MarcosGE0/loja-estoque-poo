@@ -155,12 +155,8 @@ public class Pedido implements Serializable {
 		return this.cliente;
 	}
 
-	public String getDataFinalizacao() {
-		return this.dataFinalizacao;
-	}
-
 	public String toString() {
-		return "Pedido: " + this.id
+		String pedido = "Pedido: " + this.id
 				+ "\nCliente: " + this.cliente.getNome()
 				+ "\nStatus: " + this.status
 				+ "\nData: " + this.dataCriacao
@@ -169,6 +165,10 @@ public class Pedido implements Serializable {
 				+ "\nDetalhe: " + this.getDescricaoDesconto()
 				+ "\nDesconto: R$ " + this.getValorDesconto()
 				+ "\nValor final: R$ " + this.getValorFinal();
+		if (this.dataFinalizacao != null) {
+			pedido += "\nData de finalização: " + this.dataFinalizacao;
+		}
+		return pedido;
 	}
 
 	public String getIdPedido(){

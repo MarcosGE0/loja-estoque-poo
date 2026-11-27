@@ -19,12 +19,8 @@ public class PessoaFisica extends Cliente {
 	}
 	
 	@Override
-	public String getDocumentacao() {
-		return String.format("Nome: %s \nCPF: %s", this.getNome(), this.cpf);
-	}
-	
-	@Override
 	public String toString() {
-		return String.format("%s | %s | %s | CPF: %s | %s", this.getId(), this.getNome(), this.getEmail(), this.cpf, this.isAtivo());
+		return String.format("%s | %s | %s | CPF: %s | Endereço: %s | %s",
+				this.getId(), this.getNome(), this.getEmail(), this.cpf, this.getEndereco(), this.isAtivo());
 	}
 }

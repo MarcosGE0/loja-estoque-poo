@@ -65,6 +65,7 @@ rm sources.txt
 - Validar CPF e CNPJ e impedir documentos duplicados
 - Listar usuários
 - Buscar usuário por identificador
+- Alterar e-mail e endereço de usuário
 - Desativar usuário
 - Remover usuário
 
@@ -76,6 +77,7 @@ rm sources.txt
 - Cadastrar software
 - Listar produtos
 - Buscar produto por identificador
+- Alterar preço do produto
 - Desativar produto
 - Remover produto
 - Adicionar estoque
@@ -85,6 +87,7 @@ rm sources.txt
 - Cadastrar serviço técnico
 - Listar serviços
 - Buscar serviço por identificador
+- Alterar preço por hora do serviço técnico
 - Desativar serviço
 - Remover serviço
 

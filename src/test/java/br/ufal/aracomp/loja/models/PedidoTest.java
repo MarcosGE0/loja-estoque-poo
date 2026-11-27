@@ -2,6 +2,7 @@ package br.ufal.aracomp.loja.models;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 import br.ufal.aracomp.loja.exception.DadoEntradaException;
@@ -62,6 +63,15 @@ public class PedidoTest {
 
         assertEquals(10.0, pedido.getValorDesconto());
         assertEquals(90.0, pedido.getValorFinal());
+    }
+
+    @Test
+    public void exibeDataDeFinalizacao() throws Exception {
+        Cliente cliente = new PessoaFisica("c1", "Ana", "ana@email.com", "Rua A", "529.982.247-25");
+        Pedido pedido = new Pedido("p1", cliente, "2026-11-26");
+        pedido.finalizarPedido();
+
+        assertTrue(pedido.toString().contains("Data de finalização:"));
     }
 
     @Test

@@ -13,4 +13,9 @@ public class Administrador extends Usuario{
 	public String getSetor() {
 		return this.setor;
 	}
+
+	@Override
+	public String toString() {
+		return String.format("%s | Setor: %s", super.toString(), this.getSetor());
+	}
 }

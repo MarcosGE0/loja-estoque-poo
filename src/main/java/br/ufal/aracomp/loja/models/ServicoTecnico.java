@@ -1,7 +1,6 @@
 package br.ufal.aracomp.loja.models;
 
 import br.ufal.aracomp.loja.exception.DadoEntradaException;
-import br.ufal.aracomp.loja.exception.*;
 
 import java.io.Serializable;
 
@@ -36,6 +35,13 @@ public class ServicoTecnico implements Precificavel, Serializable {
 		return total;
 	}
 
+	public void alterarPrecoHora(double precoHora) throws DadoEntradaException {
+		if (!Double.isFinite(precoHora) || precoHora < 0) {
+			throw new DadoEntradaException("O preço por hora não pode ser negativo.");
+		}
+		this.precoHora = precoHora;
+	}
+
 	public String getId() {
 		return this.id;
 	}
@@ -55,7 +61,5 @@ public class ServicoTecnico implements Precificavel, Serializable {
 	public void desativar() {
 		this.ativo = false;
 	}
-	
-	public void registrarVenda(int qtd) {}
 	
 }

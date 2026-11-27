@@ -46,6 +46,13 @@ public class ProdutoService {
 	public List<Produto> listarProdutos() {
 		return produtoRepository.listarProdutos();
 	}
+
+	public void alterarPreco(String idProduto, double novoPreco)
+			throws RegistroNaoEncontradoException, DadoEntradaException, PersistenciaException {
+		Produto produto = buscarPorId(idProduto);
+		produto.alterarPreco(novoPreco);
+		produtoRepository.salvarAlteracoes();
+	}
 	
 	
 	public void desativarProduto(String idProduto) throws RegistroNaoEncontradoException, ProdutoIndisponivelException, PersistenciaException {
