@@ -176,6 +176,7 @@ Exemplos:
 - `ProdutoIndisponivelException`
 - `EstoqueInsuficienteException`
 - `ServicoIndisponivelException`
+- `PersistenciaException`
 
 ## Testes
 

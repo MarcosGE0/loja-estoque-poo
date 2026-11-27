@@ -1,5 +1,6 @@
 package br.ufal.aracomp.loja.models;
 
+import br.ufal.aracomp.loja.exception.DadoEntradaException;
 import java.io.Serializable;
 
 public class ItemPedido implements Serializable {
@@ -7,7 +8,14 @@ public class ItemPedido implements Serializable {
 	private double precoUnitario;
 	private Precificavel item;
 	
-	public ItemPedido(int quantidade, Precificavel item) {
+	public ItemPedido(int quantidade, Precificavel item) throws DadoEntradaException {
+		if (quantidade <= 0) {
+			throw new DadoEntradaException("Quantidade deve ser maior que zero.");
+		}
+		if (item == null) {
+			throw new DadoEntradaException("Item do pedido não pode ser nulo.");
+		}
+
 		this.quantidade = quantidade;
 		this.item = item;
 		this.precoUnitario = item.getPreco();
@@ -27,11 +35,20 @@ public class ItemPedido implements Serializable {
 		return this.item;
 	}
 
-	public void adicionarQuantidade(int quantidade) {
+	public void adicionarQuantidade(int quantidade) throws DadoEntradaException {
+		if (quantidade <= 0) {
+			throw new DadoEntradaException("Quantidade deve ser maior que zero.");
+		}
 		this.quantidade += quantidade;
 	}
 
-	public void removerQuantidade(int quantidade) {
+	public void removerQuantidade(int quantidade) throws DadoEntradaException {
+		if (quantidade <= 0) {
+			throw new DadoEntradaException("Quantidade deve ser maior que zero.");
+		}
+		if (quantidade > this.quantidade) {
+			throw new DadoEntradaException("Quantidade solicitada é maior que a quantidade no pedido.");
+		}
 		this.quantidade -= quantidade;
 	}
 }

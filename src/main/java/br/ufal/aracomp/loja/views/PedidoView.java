@@ -88,24 +88,12 @@ public class PedidoView {
 			} else if (tipo == 2) {
 				System.out.print("Percentual do desconto: ");
 				double percentual = Double.parseDouble(scanner.nextLine());
-				if (percentual < 0.0 || percentual > 100.0) {
-					throw new br.ufal.aracomp.loja.exception.DadoEntradaException(
-							"Percentual do desconto deve estar entre 0 e 100.");
-				}
 				pedidoController.aplicarDesconto(idPedido, new DescontoPromocional(percentual));
 			} else if (tipo == 3) {
 				System.out.print("Quantidade mínima: ");
 				int quantidadeMinima = Integer.parseInt(scanner.nextLine());
 				System.out.print("Percentual do desconto: ");
 				double percentual = Double.parseDouble(scanner.nextLine());
-				if (quantidadeMinima <= 0) {
-					throw new br.ufal.aracomp.loja.exception.DadoEntradaException(
-							"Quantidade mínima deve ser maior que zero.");
-				}
-				if (percentual < 0.0 || percentual > 100.0) {
-					throw new br.ufal.aracomp.loja.exception.DadoEntradaException(
-							"Percentual do desconto deve estar entre 0 e 100.");
-				}
 				pedidoController.aplicarDesconto(idPedido,
 						new DescontoPorQuantidade(quantidadeMinima, percentual));
 			} else {

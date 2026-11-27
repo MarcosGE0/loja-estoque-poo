@@ -18,22 +18,16 @@ public class ProdutoService {
 	}
 	
 	public void cadastrarProduto(Produto novoProduto) throws RegistroCadastradoException, DadoEntradaException, PersistenciaException {
-		
+		if (novoProduto == null) {
+			throw new DadoEntradaException("Produto não pode ser nulo.");
+		}
+
 		for(Produto produto_cadastrado: produtoRepository.listarProdutos()) {
 			if(produto_cadastrado.getId().equals(novoProduto.getId())) {
 				throw new RegistroCadastradoException("Produto ID:" + novoProduto.getId() + " já cadastrado!");
 			}
 		}
-		
-		if (novoProduto.getPreco() <= 0) {
-			throw new DadoEntradaException("Preço deve ser maior que zero (recebido: " + novoProduto.getPreco() + ").");
-		}
-		
-		if (novoProduto.getQtdEstoque() <= 0) {
-			throw new DadoEntradaException("Quantidade em estoque deve ser maior que zero (recebida: " + novoProduto.getQtdEstoque() + ").");
-		}
-		
-		
+
 		this.produtoRepository.adicionarProduto(novoProduto);
 	}
 	
@@ -75,10 +69,6 @@ public class ProdutoService {
 	
 	
 	public void adicionarEstoque(String idProduto, int quantidade) throws RegistroNaoEncontradoException, DadoEntradaException, PersistenciaException {
-		if(quantidade <= 0) {
-			throw new DadoEntradaException("Quantidade de estoque a adicionar deve ser maior que zero (recebida: " + quantidade + ").");
-		}
-		
 		Produto produto = buscarPorId(idProduto);
 		produto.adicionarEstoque(quantidade);
 		produtoRepository.salvarAlteracoes();

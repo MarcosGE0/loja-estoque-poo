@@ -28,18 +28,18 @@ public class Pedido implements Serializable {
 		this.valorFinalAplicado = 0.0;
 	}
 	
-	public void adicionarItem(ItemPedido novo_itempedido) throws DadoEntradaException {
+	public void adicionarItem(ItemPedido itemPedido) throws DadoEntradaException {
 		if (this.status != StatusPedido.ABERTO) {
 			throw new DadoEntradaException("Não é possível alterar um pedido finalizado ou cancelado.");
 		}
-		this.itens.add(novo_itempedido);
+		this.itens.add(itemPedido);
 	}
 
-	public void removerItem(ItemPedido item) throws DadoEntradaException {
+	public void removerItem(ItemPedido itemPedido) throws DadoEntradaException {
 		if (this.status != StatusPedido.ABERTO) {
 			throw new DadoEntradaException("Não é possível alterar um pedido finalizado ou cancelado.");
 		}
-		this.itens.remove(item);
+		this.itens.remove(itemPedido);
 	}
 	
 	public List<ItemPedido> listarItens() {

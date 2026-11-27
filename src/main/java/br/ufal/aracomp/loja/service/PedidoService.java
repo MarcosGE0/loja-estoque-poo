@@ -82,10 +82,6 @@ public class PedidoService {
             ProdutoIndisponivelException, EstoqueInsuficienteException, PersistenciaException {
         Pedido pedido = buscarPedidoAberto(idPedido);
 
-        if (quantidade <= 0) {
-            throw new DadoEntradaException("Quantidade deve ser maior que zero (recebida: " + quantidade + ").");
-        }
-
         Produto produto = null;
         for (Produto produtoCadastrado : produtos.listarProdutos()) {
             if (produtoCadastrado.getId().equals(idProduto)) {
@@ -132,10 +128,6 @@ public class PedidoService {
             ServicoIndisponivelException, PersistenciaException {
         Pedido pedido = buscarPedidoAberto(idPedido);
 
-        if (quantidade <= 0) {
-            throw new DadoEntradaException("Quantidade deve ser maior que zero (recebida: " + quantidade + ").");
-        }
-
         ServicoTecnico servico = servicosTecnicos.buscarPorIdServicoTecnico(idServico);
 
         if (!servico.isDisponivel()) {
@@ -163,10 +155,6 @@ public class PedidoService {
             throw new DadoEntradaException("ID do item não pode ser vazio.");
         }
 
-        if (quantidade <= 0) {
-            throw new DadoEntradaException("Quantidade deve ser maior que zero (recebida: " + quantidade + ").");
-        }
-
         for (int i = 0; i < pedido.listarItens().size(); i++) {
             ItemPedido item = pedido.listarItens().get(i);
             if (item.getItem() instanceof Produto
@@ -189,10 +177,6 @@ public class PedidoService {
 
     private void removerQuantidadeItem(Pedido pedido, ItemPedido item, int quantidade)
             throws DadoEntradaException {
-        if (quantidade > item.getQuantidade()) {
-            throw new DadoEntradaException("Quantidade solicitada (" + quantidade + ") é maior que a quantidade no pedido (" + item.getQuantidade() + ").");
-        }
-
         if (quantidade == item.getQuantidade()) {
             pedido.removerItem(item);
         } else {
