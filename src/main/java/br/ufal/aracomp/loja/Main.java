@@ -16,25 +16,30 @@ import br.ufal.aracomp.loja.service.UsuarioService;
 import br.ufal.aracomp.loja.views.MainView;
 
 public class Main {
-	public static void main(String[] args) throws PersistenciaException {
-		UsuarioRepository usuarioRepository = new UsuarioRepository();
-		ProdutoRepository produtoRepository = new ProdutoRepository();
-		ServicoTecnicoRepository servicoTecnicoRepository = new ServicoTecnicoRepository();
-		PedidoRepository pedidoRepository = new PedidoRepository();
+	public static void main(String[] args) {
+		try {
+			UsuarioRepository usuarioRepository = new UsuarioRepository();
+			ProdutoRepository produtoRepository = new ProdutoRepository();
+			ServicoTecnicoRepository servicoTecnicoRepository = new ServicoTecnicoRepository();
+			PedidoRepository pedidoRepository = new PedidoRepository();
 
-		UsuarioService usuarioService = new UsuarioService(usuarioRepository);
-		ProdutoService produtoService = new ProdutoService(produtoRepository);
-		ServicoTecnicoService servicoTecnicoService = new ServicoTecnicoService(servicoTecnicoRepository);
-		PedidoService pedidoService = new PedidoService(pedidoRepository, usuarioRepository,
-				produtoRepository, servicoTecnicoService);
+			UsuarioService usuarioService = new UsuarioService(usuarioRepository);
+			ProdutoService produtoService = new ProdutoService(produtoRepository);
+			ServicoTecnicoService servicoTecnicoService = new ServicoTecnicoService(servicoTecnicoRepository);
+			PedidoService pedidoService = new PedidoService(pedidoRepository, usuarioRepository,
+					produtoRepository, servicoTecnicoService);
 
-		UsuarioController usuarioController = new UsuarioController(usuarioService);
-		ProdutoController produtoController = new ProdutoController(produtoService);
-		ServicoTecnicoController servicoTecnicoController = new ServicoTecnicoController(servicoTecnicoService);
-		PedidoController pedidoController = new PedidoController(pedidoService);
+			UsuarioController usuarioController = new UsuarioController(usuarioService);
+			ProdutoController produtoController = new ProdutoController(produtoService);
+			ServicoTecnicoController servicoTecnicoController = new ServicoTecnicoController(servicoTecnicoService);
+			PedidoController pedidoController = new PedidoController(pedidoService);
 
-		MainView mainView = new MainView(usuarioController, produtoController,
-				servicoTecnicoController, pedidoController);
-		mainView.exibirMenuPrincipal();
+			MainView mainView = new MainView(usuarioController, produtoController,
+					servicoTecnicoController, pedidoController);
+			mainView.exibirMenuPrincipal();
+		}
+		catch (PersistenciaException e) {
+			System.err.println(e.getMessage());
+		}
 	}
 }
