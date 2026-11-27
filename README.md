@@ -107,6 +107,9 @@ rm sources.txt
 ## Organização do projeto
 
 ```text
+docs/
+|-- Loja de Informática - Diagrama de classes.svg
+`-- Loja de Informática - Diagrama de classes.xml
 src/
 |-- main/java/br/ufal/aracomp/loja/
 |   |-- controller/
