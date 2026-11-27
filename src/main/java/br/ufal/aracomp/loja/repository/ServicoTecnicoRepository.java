@@ -8,12 +8,20 @@ public class ServicoTecnicoRepository extends ArquivoRepository<ServicoTecnico> 
     private final List<ServicoTecnico> servicoTecnico;
 
     public ServicoTecnicoRepository() {
-        super("dados/servicos.dat");
+        this("dados/servicos.dat");
+    }
+
+    public ServicoTecnicoRepository(String arquivo) {
+        super(arquivo);
         servicoTecnico = carregar();
     }
 
     public void adicionarServicoTecnico(ServicoTecnico servico) {
         servicoTecnico.add(servico);
+        salvar(servicoTecnico);
+    }
+
+    public void salvarAlteracoes() {
         salvar(servicoTecnico);
     }
 

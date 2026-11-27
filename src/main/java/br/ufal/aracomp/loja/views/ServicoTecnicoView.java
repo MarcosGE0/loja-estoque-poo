@@ -26,6 +26,7 @@ public class ServicoTecnicoView {
             System.out.println("2 - Listar serviços técnicos");
             System.out.println("3 - Buscar por ID");
             System.out.println("4 - Remover serviço técnico");
+            System.out.println("5 - Desativar serviço técnico");
             System.out.println("0 - Voltar ao Menu Principal");
             System.out.print("Selecione uma opção: ");
 
@@ -44,6 +45,8 @@ public class ServicoTecnicoView {
                 telaBuscarPorId();
             } else if (opcao == 4) {
                 telaRemoverServicoTecnico();
+            } else if (opcao == 5) {
+                telaDesativarServicoTecnico();
             } else if (opcao != 0) {
                 System.out.println("Opção inválida!");
             }
@@ -119,6 +122,19 @@ public class ServicoTecnicoView {
         try {
             servicoTecnicoController.removerServicoTecnico(id);
             System.out.println("Serviço técnico removido com sucesso!");
+        } catch (DominioException e) {
+            System.out.println("Erro: " + e.getMessage());
+        }
+    }
+
+    private void telaDesativarServicoTecnico() {
+        System.out.println("\n--- Desativar Serviço Técnico ---");
+        System.out.print("ID: ");
+        String id = scanner.nextLine();
+
+        try {
+            servicoTecnicoController.desativarServicoTecnico(id);
+            System.out.println("Serviço técnico desativado com sucesso!");
         } catch (DominioException e) {
             System.out.println("Erro: " + e.getMessage());
         }

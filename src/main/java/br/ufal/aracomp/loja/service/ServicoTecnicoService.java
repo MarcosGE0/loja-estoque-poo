@@ -20,19 +20,35 @@ public class ServicoTecnicoService {
         return servicoTecnicoRepository;
     }
 
-    public void cadastrarServicoTecnico(ServicoTecnico novo_servico) throws RegistroCadastradoException {
+    public void cadastrarServicoTecnico(ServicoTecnico novoServico) throws RegistroCadastradoException {
         for (ServicoTecnico servico : servicoTecnicoRepository.listarServicoTecnico()) {
-            if (servico.getId().equals(novo_servico.getId())) {
-                throw new RegistroCadastradoException("ID de serviço técnico já utilizado: " + novo_servico.getId() + ".");
+            if (servico.getId().equals(novoServico.getId())) {
+                throw new RegistroCadastradoException("ID de serviço técnico já utilizado: " + novoServico.getId() + ".");
             }
         }
 
-        servicoTecnicoRepository.adicionarServicoTecnico(novo_servico);
+        servicoTecnicoRepository.adicionarServicoTecnico(novoServico);
     }
 
     public void removerServicoTecnico(String idServicoTecnico) throws RegistroNaoEncontradoException {
         buscarPorIdServicoTecnico(idServicoTecnico);
         servicoTecnicoRepository.removerServicoTecnico(idServicoTecnico);
+    }
+
+    public void desativarServicoTecnico(String idServicoTecnico)
+            throws DadoEntradaException, RegistroNaoEncontradoException, ServicoIndisponivelException {
+        if (idServicoTecnico == null || idServicoTecnico.trim().isEmpty()) {
+            throw new DadoEntradaException("ID do serviço técnico não pode ser vazio.");
+        }
+
+        ServicoTecnico servico = buscarPorIdServicoTecnico(idServicoTecnico);
+        if (!servico.isDisponivel()) {
+            throw new ServicoIndisponivelException(
+                    "Serviço técnico com ID " + idServicoTecnico + " já está desativado.");
+        }
+
+        servico.desativar();
+        servicoTecnicoRepository.salvarAlteracoes();
     }
 
     public ServicoTecnico buscarPorIdServicoTecnico(String idServicoTecnico) throws RegistroNaoEncontradoException {

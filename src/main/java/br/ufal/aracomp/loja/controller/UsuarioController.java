@@ -18,12 +18,14 @@ public class UsuarioController {
 		this.usuarioservice = usuarioservice;
 	}
 	
-	public void cadastrarPessoaFisica(String id, String nome, String email, String endereco, String cpf) throws RegistroCadastradoException {
+	public void cadastrarPessoaFisica(String id, String nome, String email, String endereco, String cpf)
+			throws RegistroCadastradoException, DadoEntradaException {
 		PessoaFisica nova_pf = new PessoaFisica(id, nome, email, endereco, cpf);
 		this.usuarioservice.cadastrarUsuario(nova_pf);
 	}
 	
-	public void cadastrarPessoaJuridica(String id, String nome, String email, String endereco, String cnpj) throws RegistroCadastradoException {
+	public void cadastrarPessoaJuridica(String id, String nome, String email, String endereco, String cnpj)
+			throws RegistroCadastradoException, DadoEntradaException {
 		PessoaJuridica nova_pj = new PessoaJuridica(id, nome, email, endereco, cnpj);
 		this.usuarioservice.cadastrarUsuario(nova_pj);
 	}

@@ -8,7 +8,11 @@ public class PedidoRepository extends ArquivoRepository<Pedido> {
     private final List<Pedido> pedidos;
 
     public PedidoRepository() {
-        super("dados/pedidos.dat");
+        this("dados/pedidos.dat");
+    }
+
+    public PedidoRepository(String arquivo) {
+        super(arquivo);
         this.pedidos = carregar();
     }
 

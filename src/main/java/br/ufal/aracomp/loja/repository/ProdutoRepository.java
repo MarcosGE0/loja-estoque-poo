@@ -7,7 +7,11 @@ public class ProdutoRepository extends ArquivoRepository<Produto> {
 	private final List<Produto> produtos;
 
 	public ProdutoRepository() {
-		super("dados/produtos.dat");
+		this("dados/produtos.dat");
+	}
+
+	public ProdutoRepository(String arquivo) {
+		super(arquivo);
 		this.produtos = carregar();
 	}
 

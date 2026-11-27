@@ -7,7 +7,11 @@ public class UsuarioRepository extends ArquivoRepository<Usuario> {
 	private final List<Usuario> usuarios;
 
 	public UsuarioRepository() {
-		super("dados/usuarios.dat");
+		this("dados/usuarios.dat");
+	}
+
+	public UsuarioRepository(String arquivo) {
+		super(arquivo);
 		this.usuarios = carregar();
 	}
 

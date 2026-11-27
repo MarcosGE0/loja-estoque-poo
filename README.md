@@ -62,6 +62,7 @@ rm sources.txt
 - Cadastrar pessoa física
 - Cadastrar pessoa jurídica
 - Cadastrar administrador
+- Validar CPF e CNPJ e impedir documentos duplicados
 - Listar usuários
 - Buscar usuário por identificador
 - Desativar usuário
@@ -175,7 +176,9 @@ Exemplos:
 
 ## Testes
 
-Os testes automatizados utilizam JUnit e podem ser executados com Maven:
+Os testes automatizados utilizam JUnit e cobrem regras centrais de pedidos, produtos, usuários e serviços técnicos, incluindo validações, descontos, estoque, estados de pedidos e persistência de alterações.
+
+Execute a suíte com Maven:
 
 ```bash
 mvn test

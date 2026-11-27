@@ -1,7 +1,10 @@
 package br.ufal.aracomp.loja.service;
 import br.ufal.aracomp.loja.exception.RegistroCadastradoException;
 import br.ufal.aracomp.loja.exception.RegistroNaoEncontradoException;
+import br.ufal.aracomp.loja.models.PessoaFisica;
+import br.ufal.aracomp.loja.models.PessoaJuridica;
 import br.ufal.aracomp.loja.models.Usuario;
+import br.ufal.aracomp.loja.models.ValidadorDocumento;
 import br.ufal.aracomp.loja.repository.UsuarioRepository;
 import br.ufal.aracomp.loja.exception.*;
 import java.util.List;
@@ -18,15 +21,29 @@ public class UsuarioService {
 		
 		for(Usuario usuario_cadastrado: usuarioRepository.listarUsuarios()) { // percorrer todos os registros de usuários cadastrados
 			if(usuario_cadastrado.getEmail().equals(novoUsuario.getEmail())) { // e ver se tem algum email cadastrado
-				// se for verdadeiro, lançar a desgraça da exceção kk
 				throw new RegistroCadastradoException("E-mail já utilizado: " + novoUsuario.getEmail() + ".");
 			}
 			
 			if(usuario_cadastrado.getId().equals(novoUsuario.getId())) {
 				throw new RegistroCadastradoException("ID já utilizado: " + novoUsuario.getId() + ".");
 			}
-			
-			// ainda falta inserir duas condições para validar se existe CPF ou CNJP`já cadastrados kk
+			if (novoUsuario instanceof PessoaFisica && usuario_cadastrado instanceof PessoaFisica) {
+				String cpfExistente = ValidadorDocumento.normalizar(
+						((PessoaFisica) usuario_cadastrado).getCpf());
+				String cpfNovo = ValidadorDocumento.normalizar(((PessoaFisica) novoUsuario).getCpf());
+				if (cpfNovo.equals(cpfExistente)) {
+					throw new RegistroCadastradoException("CPF já cadastrado.");
+				}
+			}
+
+			if (novoUsuario instanceof PessoaJuridica && usuario_cadastrado instanceof PessoaJuridica) {
+				String cnpjExistente = ValidadorDocumento.normalizar(
+						((PessoaJuridica) usuario_cadastrado).getCnpj());
+				String cnpjNovo = ValidadorDocumento.normalizar(((PessoaJuridica) novoUsuario).getCnpj());
+				if (cnpjNovo.equals(cnpjExistente)) {
+					throw new RegistroCadastradoException("CNPJ já cadastrado.");
+				}
+			}
 		}
 		
 		this.usuarioRepository.adicionarUsuario(novoUsuario); // se passar por todas as regras
