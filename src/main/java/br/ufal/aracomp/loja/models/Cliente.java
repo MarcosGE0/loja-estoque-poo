@@ -7,9 +7,7 @@ public abstract class Cliente extends Usuario {
 	
 	public Cliente(String id, String nome, String email, String endereco) throws DadoEntradaException {
 		super(id, nome, email);
-		if (endereco == null || endereco.isBlank()) {
-			throw new DadoEntradaException("Endereço do cliente não pode ser vazio.");
-		}
+		validarEndereco(endereco);
 		this.endereco = endereco;
 	}
 	
@@ -18,11 +16,14 @@ public abstract class Cliente extends Usuario {
 	}
 
 	public void alterarDadosContato(String email, String endereco) throws DadoEntradaException {
-		if (endereco == null || endereco.isBlank()) {
-			throw new DadoEntradaException("Endereço do cliente não pode ser vazio.");
-		}
+		validarEndereco(endereco);
 		super.alterarEmail(email);
 		this.endereco = endereco;
 	}
-	
+
+	private static void validarEndereco(String endereco) throws DadoEntradaException {
+		if (endereco == null || endereco.isBlank()) {
+			throw new DadoEntradaException("Endereço do cliente não pode ser vazio.");
+		}
+	}
 }
