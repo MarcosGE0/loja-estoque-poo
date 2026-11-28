@@ -21,7 +21,7 @@ O projeto foi desenvolvido no contexto da disciplina Programação Orientada a O
 Clone o repositório:
 
 ```bash
-git clone [https://github.com/MarcosGE0/loja-estoque-poo.git](https://github.com/MarcosGE0/loja-estoque-poo.git)
+git clone https://github.com/MarcosGE0/loja-estoque-poo.git
 cd loja-estoque-poo
 ```
 
@@ -113,7 +113,7 @@ rm sources.txt
 ```text
 docs/
 |-- diagrama-classes.png
-`-- diagrama-classes.drawio
+`-- diagrama-classes.xml
 src/
 |-- main/java/br/ufal/aracomp/loja/
 |   |-- controller/
@@ -199,7 +199,7 @@ A modelagem UML do projeto está disponível em `docs/`. Os padrões de projeto 
 ![Diagrama de classes](docs/diagrama-classes.png)
 
 - [`docs/diagrama-classes.png`](docs/diagrama-classes.png): diagrama para visualização (clique na imagem para abrir em tamanho original).
-- [`docs/diagrama-classes.drawio`](docs/diagrama-classes.drawio): arquivo-fonte editável, aberto com o draw.io.
+- [`docs/diagrama-classes.xml`](docs/diagrama-classes.drawio): arquivo-fonte editável, aberto com o draw.io.
 
 ## Uso de IA
 
