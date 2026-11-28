@@ -111,8 +111,8 @@ rm sources.txt
 
 ```text
 docs/
-|-- Loja de Informática - Diagrama de classes.svg
-`-- Loja de Informática - Diagrama de classes.xml
+|-- Diagrama de Classes.png
+`-- Diagrama de Classes.xml
 src/
 |-- main/java/br/ufal/aracomp/loja/
 |   |-- controller/
@@ -193,10 +193,12 @@ mvn test
 
 ## UML
 
-A modelagem UML do projeto está disponível em `docs/`:
+A modelagem UML do projeto está disponível em `docs/`. Os padrões de projeto Strategy e Repository estão identificados no diagrama.
 
-- `Loja de Informática - Diagrama de classes.svg`: diagrama para visualização.
-- `Loja de Informática - Diagrama de classes.xml`: arquivo-fonte editável do diagrama.
+![Diagrama de classes](docs/Diagrama de Classes.png)
+
+- `docs/diagrama-classes.png`: diagrama para visualização (clique na imagem para abrir em tamanho original).
+- `docs/diagrama-classes.drawio`: arquivo-fonte editável, aberto com o [draw.io](https://app.diagrams.net/).
 
 ## Uso de IA
 
