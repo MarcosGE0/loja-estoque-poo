@@ -1,4 +1,4 @@
-# Loja de Informática e Administração de Estoque
+  # Loja de Informática e Administração de Estoque
 
 Sistema de informação desenvolvido em Java para administrar usuários, produtos, serviços técnicos e pedidos de uma loja de informática.
 
@@ -13,6 +13,7 @@ O projeto foi desenvolvido no contexto da disciplina Programação Orientada a O
 ## Requisitos
 
 - Java 21 ou superior
+- Maven, para executar a suíte de testes automatizados
 - Git, caso queira clonar o projeto pelo terminal
 
 ## Como baixar e executar
@@ -20,7 +21,7 @@ O projeto foi desenvolvido no contexto da disciplina Programação Orientada a O
 Clone o repositório:
 
 ```bash
-git clone https://github.com/MarcosGE0/loja-estoque-poo.git
+git clone [https://github.com/MarcosGE0/loja-estoque-poo.git](https://github.com/MarcosGE0/loja-estoque-poo.git)
 cd loja-estoque-poo
 ```
 
@@ -111,8 +112,8 @@ rm sources.txt
 
 ```text
 docs/
-|-- Diagrama de Classes.png
-`-- Diagrama de Classes.xml
+|-- diagrama-classes.png
+`-- diagrama-classes.drawio
 src/
 |-- main/java/br/ufal/aracomp/loja/
 |   |-- controller/
@@ -197,8 +198,8 @@ A modelagem UML do projeto está disponível em `docs/`. Os padrões de projeto 
 
 ![Diagrama de classes](docs/diagrama-classes.png)
 
-- `docs/diagrama-classes.png`: diagrama para visualização (clique na imagem para abrir em tamanho original).
-- `docs/diagrama-classes.drawio`: arquivo-fonte editável, aberto com o [draw.io](https://app.diagrams.net/).
+- [`docs/diagrama-classes.png`](docs/diagrama-classes.png): diagrama para visualização (clique na imagem para abrir em tamanho original).
+- [`docs/diagrama-classes.drawio`](docs/diagrama-classes.drawio): arquivo-fonte editável, aberto com o draw.io.
 
 ## Uso de IA
 
