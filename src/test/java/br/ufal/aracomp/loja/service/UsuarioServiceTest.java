@@ -97,6 +97,17 @@ public class UsuarioServiceTest {
     }
 
     @Test
+    public void permiteManterProprioEmailAoAlterarEndereco() throws Exception {
+        service.cadastrarUsuario(pessoa("u1", "ana@email.com", "CPF 123"));
+
+        service.alterarDadosUsuario("u1", "ana@email.com", "Rua B");
+
+        PessoaFisica usuario = (PessoaFisica) service.buscarPorId("u1");
+        assertEquals("ana@email.com", usuario.getEmail());
+        assertEquals("Rua B", usuario.getEndereco());
+    }
+
+    @Test
     public void rejeitaEnderecoVazioAoAlterarSemAtualizarParcialmente() throws Exception {
         service.cadastrarUsuario(pessoa("u1", "ana@email.com", "CPF 123"));
 
