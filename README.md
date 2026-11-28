@@ -195,7 +195,7 @@ mvn test
 
 A modelagem UML do projeto está disponível em `docs/`. Os padrões de projeto Strategy e Repository estão identificados no diagrama.
 
-![Diagrama de classes](docs/Diagrama de Classes.png)
+![Diagrama de classes](docs/diagrama-classes.png)
 
 - `docs/diagrama-classes.png`: diagrama para visualização (clique na imagem para abrir em tamanho original).
 - `docs/diagrama-classes.drawio`: arquivo-fonte editável, aberto com o [draw.io](https://app.diagrams.net/).
